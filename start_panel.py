@@ -24,6 +24,7 @@ def start_panel():
                 print("خوش اومدی ادمین")
             else :
                 print("Error wrong password")
+                state = 0
                 continue
         pass
 
