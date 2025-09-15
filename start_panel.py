@@ -20,7 +20,7 @@ def start_panel():
                 print("Error wrong user name")
                 continue
             if password == "Pass_Train" and state == 1 :
-                admin = Admin_Panel()    # فراخوانی کلاس ادمین کل
+                                # فراخوانی کلاس ادمین کل
                 print("خوش اومدی ادمین")
             else :
                 print("Error wrong password")
