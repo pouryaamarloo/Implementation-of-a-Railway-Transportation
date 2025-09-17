@@ -1,6 +1,22 @@
+from curses.ascii import isdigit
+from logging import exception
+
+
 class Employee:
     def __init__(self):
-        pass
+        self.line_name = ""
+        self.start = ""
+        self.end = ""
+        self.Count = 0
+        self.list_lines = []
+
+        self.train_name = ""
+        self.line = ""
+        self.speed = 0
+        self.wait = 0
+        self.rate = 0
+        self.price = 0
+        self.amount = 0
 
 
     def add_line(self):
@@ -16,7 +32,36 @@ class Employee:
         pass
 
     def add_train(self):
-        pass
+        try :
+            while True:
+                self.train_name = input("Enter train name:\nexit ")
+                if self.train_name == 'exit':
+                    self.panel_employee()
+                    break
+                if self.train_name == "":
+                    continue
+                self.line_name = input("Enter line name:\nexit  ")
+                if self.line_name not in self.list_lines:
+                    print("line name is not exist")
+                    while True:
+                        self.line_name = input("Enter line name:\nexit  ")
+                        if self.line_name  in self.list_lines:
+                            break
+                if self.line == "":
+                    continue
+                if self.line_name == "exit" :
+                    self.panel_employee()
+                    break
+                self.speed =int(input("Enter speed:\nexit "))
+        except exception as e :
+                print(e)
+
+
+
+
+
+
+
 
     def delete_train(self):
         pass
