@@ -1,6 +1,7 @@
 from curses.ascii import isdigit
-import pyinputplus
 from logging import exception
+import pyinputplus as pyip
+
 
 
 class Employee:
@@ -33,35 +34,36 @@ class Employee:
         pass
 
     def add_train(self):
-        try :
+        def check_Str():
             while True:
-                self.train_name = input("Enter train name:\nexit ")
-                if self.train_name == 'exit':
-                    self.panel_employee()
-                    break
-                if self.train_name == "":
+                name = input()
+                if name.isdigit():
+                    print("لطفا اطلاعات درست وارد کنید")
+                else :
+                    return name
+        def check_int():
+            while True:
+                try :
+                    adad = int(input())
+                except :
+                    print("لطفا عدد وارد کنید ")
                     continue
-                self.line_name = input("Enter line name:\nexit  ")
-                if self.line_name not in self.list_lines:
-                    print("line name is not exist")
-                    while True:
-                        self.line_name = input("Enter line name:\nexit  ")
-                        if self.line_name  in self.list_lines:
-                            break
-                if self.line == "":
-                    continue
-                if self.line_name == "exit" :
-                    self.panel_employee()
-                    break
-                self.speed =int(input("Enter speed:\nexit "))
-        except exception as e :
-                print(e)
-
-
-
-
-
-
+                if type(adad) == int :
+                    return adad
+        print("لطفا نام قطار را وارد کنید ")
+        self.train_name = check_Str()
+        print("لطفا خط حرکت را وارد کنید")
+        while True:
+            self.line_name = check_int()
+            if self.line_name not in self.list_lines :
+                print("خط مورد نظر وجود ندارد")
+            else :
+                break
+        print("سرعت متوسط را وارد کنید")
+        self.speed = check_int()
+        print("میزان توقف در هر ایستکاه را وارد کنید")
+        self.wait = check_int()
+        self.rate = pyip.inputInt("کیفیت قطار را از 1تا5 انتخاب کنید: ", min=1, max=5)
 
 
     def delete_train(self):
@@ -109,5 +111,4 @@ class Employee:
 
 pourya = Employee()
 pourya.panel_employee()
-
 
