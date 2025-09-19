@@ -123,8 +123,20 @@ class Employee:
 
 
 
+
     def list_train(self):
-        pass
+        print(self.detail)
+        while True:
+            try:
+                a = int(input("اگر قصد خروج دارید عدد صفر را وارد کنید "))
+            except :
+                print("لطفا فقط عدد وارد کنید")
+            if a == 0:
+                self.panel_employee()
+                break
+            else:
+                print("لطفا مقدار صحیح را وارد کنید")
+
 
     def panel_employee(self):
         while True:
