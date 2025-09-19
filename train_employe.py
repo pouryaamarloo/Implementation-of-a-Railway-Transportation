@@ -19,6 +19,7 @@ class Employee:
         self.rate = 0
         self.price = 0
         self.amount = 0
+        self.detail = []
 
 
     def add_line(self):
@@ -34,40 +35,93 @@ class Employee:
         pass
 
     def add_train(self):
-        def check_Str():
+        def check_Str():#حساب کردن ورودی های رشته ای
             while True:
+                print("برای خروج exit را تایپ کنید :")
                 name = input()
+                if name == "":
+                    print("لطفا اطلاعات وارد کنید خالی نگذارید ")
+                    continue
                 if name.isdigit():
-                    print("لطفا اطلاعات درست وارد کنید")
+                    print("لطفا اطلاعات درست وارد کنید :")
                 else :
                     return name
-        def check_int():
+        def check_int():#حساب کردن ورودی های عددی
             while True:
                 try :
+                    print("برای خروج عدد صفر را وارد کنید :")
                     adad = int(input())
+                    if adad < 0 :
+                        print("عدد باید مثبت باشه ")
+                        continue
                 except :
-                    print("لطفا عدد وارد کنید ")
+                    print("لطفا عدد وارد کنید :")
                     continue
                 if type(adad) == int :
                     return adad
-        print("لطفا نام قطار را وارد کنید ")
+        print("لطفا نام قطار را وارد کنید : ")
         self.train_name = check_Str()
-        print("لطفا خط حرکت را وارد کنید")
+        if self.train_name == "exit":
+            self.train_name = ""
+            self.panel_employee()
+        print("لطفا خط حرکت را وارد کنید :")
         while True:
-            self.line_name = check_int()
+            self.line_name = check_Str()
             if self.line_name not in self.list_lines :
-                print("خط مورد نظر وجود ندارد")
+                print("خط مورد نظر وجود ندارد :")
             else :
                 break
-        print("سرعت متوسط را وارد کنید")
+        print("سرعت متوسط را وارد کنید :")
         self.speed = check_int()
-        print("میزان توقف در هر ایستکاه را وارد کنید")
+        if self.speed == 0 :
+            self.panel_employee()
+        print("میزان توقف در هر ایستکاه را وارد کنید :")
         self.wait = check_int()
-        self.rate = pyip.inputInt("کیفیت قطار را از 1تا5 انتخاب کنید: ", min=1, max=5)
+        if self.wait == 0 :
+            self.panel_employee()
+        print("لطفا کیفیت قطار را بین 1 تا 5 ستاره انتخاب کنید\nبرای خروج گزینه 0 را وارد کنید :")
+        self.rate = pyip.inputInt(min= 0 , max =5)
+        if self.rate == 0 :
+            self.panel_employee()
+        print("هزینه قطار را وارد کنید :")
+        self.price = check_int()
+        if self.price == 0 :
+            self.panel_employee()
+        print("لطفا ظرفیت را وارد کنید :")
+        if self.amount == 0 :
+            self.panel_employee()
+        id_ = len(self.detail)+1
 
+        dict_ = dict(train_name = self.train_name,line_name = self.line_name,
+                     speed = self.speed,wait = self.wait,
+                     rate = self.rate,price = self.price,amount = self.amount,id = id_ )
+        self.detail.append(dict_)
+        print("اگر باز هم میخواهید اطلاعات قطار جدید ارائه دهید گزینه یک \nاگر میخواهد به پنل کارمند بروید گزینه 0")
+        select_= pyip.inputInt(min= 0 , max =1)
+        if select_ == 0:
+            self.panel_employee()
+        else :
+            self.add_train()
 
     def delete_train(self):
-        pass
+        list_ = []
+        while True:
+            try:
+                id_ = int(input("لطفا ایدی قطار مورد نظر را وارد کنید\nاگر قصد بازگشت دارید عدد 0 را وارد کنید"))
+            except :
+                print("آیدی حتما باید عدد باشد دوست عزیز !!!")
+                continue
+            for i in self.detail:
+                list_.append(i["id"])
+            if id_ not in  list_ :
+                print("آیدی که ووارد کردید وجود خارجی ندارد لطفا دوباره تلاش کنید")
+            else :
+                break
+        for i in self.detail :
+            if i["id"] == id_ :
+                self.detail.remove(i)
+
+
 
     def list_train(self):
         pass
