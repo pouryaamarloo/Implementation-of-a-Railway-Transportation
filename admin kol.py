@@ -14,22 +14,22 @@ def start_panel():
         if user_input == 1:
             user_name = input()
             password = input()
-            if user_name == "Admin_Train" :
+            if user_name == "Admin_Train" :#اگر ورودی 1 بود و یوزر نیم صحیح بود وارد پنل ادمین کل شود
                 state = 1
             else :
-                print("Error wrong user name")
+                print("Error wrong user name")#در صورت اشتباه بودن یوزر نیم این پیام نمایش داده شود
                 continue
-            if password == "Pass_Train" and state == 1 :
+            if password == "Pass_Train" and state == 1 :#:اگر پسورد تعیین شده بود و یوزر نیم درست وارد شده بود 
                 admin = ManagementPanel()    # فراخوانی کلاس ادمین کل
-                print("به پنل مدیریت خوش آمدید")
+                print("welcome to the Management Panel!")#نمایش پیام خوش آمد گویی 
                 
             else :
-                print("Error wrong password")
+                print("Error wrong password")#در صورت اشتباه بودن پسورد پیام مقابل نمایش داده شود
                 continue
 
 class Employee:
     def __init__(self, name, family, username, password, email): #مشخصات کارمند ها مثل اسم و فامیل و یوزرنیم و پسورد و ایمیل توی این کلاس اورده شدن
-        self.name = name
+        self.name = name#تعریف آرگمان ها
         self.family = family
         self.username = username
         self.password = password
@@ -39,46 +39,53 @@ class ManagementPanel:#کلاس پنل مدیریت
     def __init__(self):
         self.employees = []  # لیست کارمندها
 
-    def panel(self):
+    def panel(self):#متد انتخاب پنل توسط کاربر
         while True:
             print("1:add employee")
             print("2:remove employee")
             print("3:show employee's list")
             print("4:exit to start panel")
+            
             choice=int(input())
-            if choice==1:
-                self.add_employee()
-            elif choice ==2:
-                self.remove_employee()
-            elif choice ==3:
-                self.list_employees()
-            elif choice==4:
-                break
+            if choice==1:#اگر عدد 1 وارد شد
+                self.add_employee()#باز شدن پنل اضافه کردن کارمند قطار
+            
+            elif choice ==2:#اگر عدد 2 وارد شد
+                self.remove_employee()#باز شدن پنل حذف کارمند قطار
+            
+            elif choice ==3:#اگر عدد 3 وارد شد
+                self.list_employees()#باز شدن پنل نمایش لیست کارمندان قطار
+            
+            elif choice==4:#اگر عدد 4 وارد شد
+                break#خروج از پنل مدیریت
+            
             else:
-                print("invalid choice")
+                print("invalid choice")#در صورت انتخاب اعداد غیر از اعداد 1 تا 4 این پیام نمایش داده شود
 
 
-    def add_employee(self):
+    def add_employee(self):#متد پنل اضافه کردن کارمند قطار
         import re
-        username = input(":لطفا یوزرنیم کارمند را وارد کنید")
+        username = input("Please enter the employee's username:")#دریافت یوزرنیم از کاربر
+        
         # بررسی تکراری بودن username
         for e in self.employees:
             if e.username == username:
-                print("Error: یوزرنیم در حال حاضر وجود دارد")
-                return
-        password = input(":لطفا پسورد کارمند را وارد کنید")
+                print("Error: The username already exists")
+                return#خروج از متد در صورت تکراری بودن
+            
+        password = input("Please enter the employee's password:")  # دریافت پسورد از کاربر
         pass_pattern= r'^[A-Za-z0-9@&]+$'
         if not re.match(pass_pattern,password):
             print("password must includ :english alphabet,numbers ,@ or &")
             return
-        email = input(":لطفا ایمیل کارمند را وارد کنید")
+        email = input("Please enter the employee's email:")
         email_pattern=r'^[a-zA-Z0-9_.+-]+@(gmail|yahoo)\.com$'
         if not re.match(email_pattern,email):
             print("the email must follow the correct format")
             return
         while True:   
-            name = input(":لطفا اسم کارمند را وارد کنید")
-            family = input(":لطفا فامیلی کارمند را وارد کنید")
+            name = input("Please enter the employee's name:")
+            family = input("Please enter the employee's family name:")
             if not name.isalpha() or not family.isalpha():
                 print("name or family name is invalid")
 
@@ -91,20 +98,20 @@ class ManagementPanel:#کلاس پنل مدیریت
             else:
                 emp = Employee(name, family, username, password, email)
                 self.employees.append(emp)
-                print(f"کارمند {username}با موفقیت اضافه شد")#پیام اضافه کردن کارمند
+                print(f"Employee {username} successfully added.")#پیام اضافه کردن کارمند
 
     def remove_employee(self):
-        username = input(":لطفا یوزرنیم کارمند را وارد کنید")
+        username = input("Please enter the employee's username:")
         # بررسی وجود username
         for e in self.employees:
             if e.username == username:
                 self.employees.remove(e)
-                print(f"کارمند {username}با موفقیت حذف شد")#پیام حذف کارمند
+                print(f"Employee {username} has been successfully deleted")#پیام حذف کارمند
                 return
-        print("Error: !کارمند یافت نشد")
+        print("Error: Employee not found!")
 
     def list_employees(self):
         if not self.employees:
-            print("!کارمند یافت نشد")
+            print("Employee not found!")
         for e in self.employees:
             print(f"Username: {e.username}, Name: {e.name} {e.family}")
