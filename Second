@@ -1,0 +1,51 @@
+class User:
+    def __init__(self, username, email, password):
+        self.username = username
+        self.email = email
+        self.password = password
+
+class UserSystem:
+    def __init__(self):
+        self.users = []
+
+    def register(self, username, email, password):
+        for user in self.users:
+            if user.username == username or user.email == email:
+                print(" نام کاربری یا ایمیل قبلا ثبت شده است.")
+                return
+        new_user = User(username, email, password)
+        self.users.append(new_user)
+        print("ثبت نام موفقیت آمیز بود.")
+
+    def login(self, username, password):
+        for user in self.users:
+            if user.username == username and user.password == password:
+                print(" ورود موفقیت‌آمیز بود! خوش آمدید.")
+                return
+        print( "نام‌کاربری یا رمز عبور اشتباه است.")
+
+    def show_menu(self):
+        while True:
+            print("\n--- منو اصلی ---")
+            print("1. ثبت‌ نام")
+            print("2. ورود")
+            print("3. خروج")
+            choice = input("انتخاب کاربر: ")
+
+            if choice == "1":
+                u = input("نام‌کاربری: ")
+                e = input("ایمیل: ")
+                p = input("رمز عبور: ")
+                self.register(u, e, p)
+            elif choice == "2":
+                u = input("نام‌کاربری: ")
+                p = input("رمز عبور: ")
+                self.login(u, p)
+            elif choice == "3":
+                print(" خدانگهدار!")
+                break
+            else:
+                print("لطفاً گزینه درست را وارد نمایید.")
+
+system = UserSystem()
+system.show_menu()
