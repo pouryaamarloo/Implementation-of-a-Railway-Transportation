@@ -1,4 +1,5 @@
 from train_employe import *
+from bank import API
 class Buy_Ticket():
     def __init__(self):
         super().__init__()
@@ -33,6 +34,14 @@ class Transaction(Buy_Ticket):
         else :
             card=input("Enter the card number: ")
             exp_moth =check_int()
+            exo_year = check_int()
+            password = check_int()
+            cvv2 = check_int()
+            Valid = API ()
+            flag = Valid.validate(card,exp_moth,exo_year,password,cvv2)
+            if flag:
+
+
 
 
 
