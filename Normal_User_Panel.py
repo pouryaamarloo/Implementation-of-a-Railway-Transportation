@@ -13,17 +13,26 @@ class Normal_User_Panel():
         patern = r'^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$'
         correct_email = re.match(patern , email)
         return correct_email
+    
     def Acceptable_Password(password) :
         patern = r'^(?=.*[a-zA-z])(?=.*\d)(?=.*[@&]){8 , 10}'
         correct_pass = re.match(patern , password)
         return correct_pass
+    
     def Acceptable_Username(username) :
         patern = r'^(?=.*[a-zA-z])(?=.*\d){4 , 10}$'
         correct_username = re.match(patern , username)
         return correct_username
     
+    def is_duplicate(username, email):
+        for user in users:
+            if user.username == username or user.email == email:
+                return True
+        return False
+    
     def Register(self) :
         print("\n*REGISTER*")
+        
         while True :
             self.name = ""
             name = input("Name :")
