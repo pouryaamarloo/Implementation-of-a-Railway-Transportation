@@ -1,13 +1,13 @@
 import re #چون باید باید از Regex استفاده بشه
 
 class Normal_User_Panel():
-    def __init__(self , name , email , username , password):
-        self.name = name
-        self.email = email
-        self.username = username
-        self.password = password
+    def __init__(self):
+        self.name = ""
+        self.email = ""
+        self.username = ""
+        self.password = ""
 
-        Users = {} #برای ذخیره کردن کاربر
+        self.Users = [] #برای ذخیره کردن کاربر
     #باید قبل از گرفتن اطلاعات با ریجکس ایمیل و یوزرنیم و پسورد رو بررسی کنیم
     def Acceptable_Email(email) :
         patern = r'^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$'
@@ -22,11 +22,12 @@ class Normal_User_Panel():
         correct_username = re.match(patern , username)
         return correct_username
     
-    def Register() :
+    def Register(self) :
         print("\n*REGISTER*")
         while True :
+            self.name = ""
             name = input("Name :")
-
+            
             email = input("Email :")
             if not Acceptable_Email(email) :
                 print("Email is invalid!")
@@ -44,15 +45,15 @@ class Normal_User_Panel():
 
 
 
-        def Menu(self):
-            while True : #تا زمانی که دکمه بازگشت نخوره این حلقه ادامه داره
-                ("Register , \nLogin , \nBack")
-                user_choice = input() #کاربر باید از بین 3 گزینه منو یکی را انتخاب کنه
-                if user_choice == "Register" :
-                    Register()
-                elif user_choice == "Login" :
-                    Login()
-                elif user_choice == "Back" :
-                    break
+    def Menu(self):
+        while True : #تا زمانی که دکمه بازگشت نخوره این حلقه ادامه داره
+            ("Register , \nLogin , \nBack")
+            user_choice = input() #کاربر باید از بین 3 گزینه منو یکی را انتخاب کنه
+            if user_choice == "Register" :
+                Register()
+            elif user_choice == "Login" :
+                Login()
+            elif user_choice == "Back" :
+                break
             
              
