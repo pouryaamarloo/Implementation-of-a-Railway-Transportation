@@ -1,3 +1,6 @@
+import re
+
+
 def start_panel():
     '''
     پنل شروع جهت فراخوانی پنل های متفاوت از قبیل
@@ -19,52 +22,27 @@ def start_panel():
             else :
                 print("Error wrong user name")#در صورت اشتباه بودن یوزر نیم این پیام نمایش داده شود
                 continue
-            if password == "Pass_Train" and state == 1 :#:اگر پسورد تعیین شده بود و یوزر نیم درست وارد شده بود 
+            if password == "Pass_Train" and state == 1 :#:اگر پسورد تعیین شده بود و یوزر نیم درست وارد شده بود
+                print("welcome to the Management Panel!")#نمایش پیام خوش آمد گویی
                 admin = ManagementPanel()    # فراخوانی کلاس ادمین کل
-                print("welcome to the Management Panel!")#نمایش پیام خوش آمد گویی 
-                
+                break
             else :
                 print("Error wrong password")#در صورت اشتباه بودن پسورد پیام مقابل نمایش داده شود
                 continue
 
-class Employee:
-    def __init__(self, name, family, username, password, email): #مشخصات کارمند ها مثل اسم و فامیل و یوزرنیم و پسورد و ایمیل توی این کلاس اورده شدن
-        self.name = name#تعریف آرگمان ها
-        self.family = family
-        self.username = username
-        self.password = password
-        self.email = email
 
 class ManagementPanel:#کلاس پنل مدیریت
     def __init__(self):
         self.employees = []  # لیست کارمندها
+        self.name = ""       #تعریف آرگمان ها
+        self.family = ""
+        self.username = ""
+        self.password = ""
+        self.email = ""
 
-    def panel(self):#متد انتخاب پنل توسط کاربر
-        while True:
-            print("1:add employee")
-            print("2:remove employee")
-            print("3:show employee's list")
-            print("4:exit to start panel")
-            
-            choice=int(input())
-            if choice==1:#اگر عدد 1 وارد شد
-                self.add_employee()#باز شدن پنل اضافه کردن کارمند قطار
-            
-            elif choice ==2:#اگر عدد 2 وارد شد
-                self.remove_employee()#باز شدن پنل حذف کارمند قطار
-            
-            elif choice ==3:#اگر عدد 3 وارد شد
-                self.list_employees()#باز شدن پنل نمایش لیست کارمندان قطار
-            
-            elif choice==4:#اگر عدد 4 وارد شد
-                break#خروج از پنل مدیریت
-            
-            else:
-                print("invalid choice")#در صورت انتخاب اعداد غیر از اعداد 1 تا 4 این پیام نمایش داده شود
 
 
     def add_employee(self):#متد پنل اضافه کردن کارمند قطار
-        import re
         username = input("Please enter the employee's username:")#دریافت یوزرنیم از کاربر
         
         # بررسی تکراری بودن username
@@ -140,3 +118,29 @@ class ManagementPanel:#کلاس پنل مدیریت
             print("Employee not found!")
         for e in self.employees:
             print(f"Username: {e.username}, Name: {e.name} {e.family}")
+
+    def panel(self):  # متد انتخاب پنل توسط کاربر
+        while True:
+            print("1:add employee")
+            print("2:remove employee")
+            print("3:show employee's list")
+            print("4:exit to start panel")
+
+            choice = input()
+            if choice == "1":  # اگر عدد 1 وارد شد
+                self.add_employee()  # باز شدن پنل اضافه کردن کارمند قطار
+                break
+
+            elif choice == "2":  # اگر عدد 2 وارد شد
+                self.remove_employee()  # باز شدن پنل حذف کارمند قطار
+                break
+
+            elif choice == "3":  # اگر عدد 3 وارد شد
+                self.list_employees()  # باز شدن پنل نمایش لیست کارمندان قطار
+                break
+            elif choice == "4":  # اگر عدد 4 وارد شد
+                start_panel()
+                break  # خروج از پنل مدیریت
+
+            else:
+                print("invalid choice")  # در صورت انتخاب اعداد غیر از اعداد 1 تا 4 این پیام نمایش داده شود
