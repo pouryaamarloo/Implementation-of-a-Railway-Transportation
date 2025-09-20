@@ -68,8 +68,6 @@ class Normal_User_Panel():
             else :
                 print("The username or password is incorrect. Please try again.")
 
-
-
     def Menu(self):
         while True : #تا زمانی که دکمه بازگشت نخوره این حلقه ادامه داره
             ("Register , \nLogin , \nBack")
