@@ -4,11 +4,12 @@ import pyinputplus as pyip
 
 
 
-class Employee:
+class Employee():
     def __init__(self):
         self.line_name = ""
         self.start = ""
         self.end = ""
+        self.total = 0
         self.Count = 0
         self.list_lines = []
 
