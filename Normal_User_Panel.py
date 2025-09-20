@@ -24,11 +24,6 @@ class Normal_User_Panel():
         correct_username = re.match(patern , username)
         return correct_username
     
-    def is_duplicate(username, email):
-        for user in users:
-            if user.username == username or user.email == email:
-                return True
-        return False
     
     def Register(self) :
         print("\n*REGISTER*")
@@ -51,6 +46,27 @@ class Normal_User_Panel():
             if not Acceptable_Password(password) :
                 print("Your password must be 8 to 10 characters long and include both letters and numbers, and contain either **&** or **@**.")
                 continue
+            
+            #تکراری بودن ایمیل و یوزر بررسی بشه!!
+    def Login(self) :
+        print("\n*Login*")
+        while True :
+            self.username = ""
+            username = input("Username :")
+            self.password = ""
+            password = input("Password :")
+            #باید بررسی کنیم که آیا کاربری وجود دارد یا نه
+            karbar = None
+            #درست بودن یوزر نیم و پسورد را بررسی میکنیم
+            for user in self.Users :
+                if user.username == username and user.password == password :
+                    karbar = user
+                    break
+            if karbar is not None :
+                print("Login successful! Welcome!")
+                break
+            else :
+                print("The username or password is incorrect. Please try again.")
 
 
 
