@@ -1,4 +1,5 @@
 from admin_kol import *
+from train_employe import *
 def start_panel():
     '''
     پنل شروع جهت فراخوانی پنل های متفاوت از قبیل
@@ -36,7 +37,7 @@ def start_panel():
                 for i in admin.employess():
                     if i["user_name"] == user_name and i["password"] == password:
                         print(f"welcome to the Management Panel!{i['name']}")
-                        employee = Employe()
+                        employee = Employee()
                         employee.panel_employee()
                         break
 
