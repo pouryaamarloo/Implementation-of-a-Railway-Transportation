@@ -90,9 +90,9 @@ class ManagementPanel:#کلاس پنل مدیریت
                 print("name or family name is invalid")
 
                 choice=input("1 : mikhaham dobare vared konam ,2 : bargasht be panel")
-                if choice == 1:
+                if choice == "1":
                    continue
-                elif choice == 2:
+                elif choice == "2":
                     break
         
             else:
