@@ -1,4 +1,4 @@
-from admin_kol import *
+#from admin_kol import *
 from train_employe import *
 def start_panel():
     '''
@@ -23,8 +23,8 @@ def start_panel():
                 continue
             if password == "Pass_Train" and state == 1:  #:اگر پسورد تعیین شده بود و یوزر نیم درست وارد شده بود
                 print("welcome to the Management Panel!")  # نمایش پیام خوش آمد گویی
-                admin = ManagementPanel()  # فراخوانی کلاس ادمین کل
-                admin.panel()
+                #admin = ManagementPanel()  # فراخوانی کلاس ادمین کل
+                #admin.panel()
                 continue
 
             else:

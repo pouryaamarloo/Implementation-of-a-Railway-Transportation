@@ -1,18 +1,18 @@
 from bank import API
 from train_employe import *
 import pyinputplus as pyip
-class Samaneh(Employee):
+class Normal_User_Panel(Employee):
     def __init__(self):
         super().__init__()
 
 
-class Buy_Ticket(Samaneh):
+class Buy_Ticket(Normal_User_Panel):
     def __init__(self):
         super().__init__()
 
 
     def buy_ticket(self):
-        print(f"{self.detail}")
+        pass
 
     def edit_detail(self):
         pass
