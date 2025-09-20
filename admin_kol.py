@@ -1,36 +1,5 @@
 import re
 
-
-def start_panel():
-    '''
-    پنل شروع جهت فراخوانی پنل های متفاوت از قبیل
-    ادمین کل ، کارمند قطار، کاربر عادی
-    '''
-    state =0
-    while True:
-        print("1.ادمین کل")
-        print("2.کارمند قطار")
-        print("3.کاربر عادی")
-        print("4.خروج")
-        user_input = int(input())
-
-        if user_input == 1:
-            user_name = input()
-            password = input()
-            if user_name == "Admin_Train" :#اگر ورودی 1 بود و یوزر نیم صحیح بود وارد پنل ادمین کل شود
-                state = 1
-            else :
-                print("Error wrong user name")#در صورت اشتباه بودن یوزر نیم این پیام نمایش داده شود
-                continue
-            if password == "Pass_Train" and state == 1 :#:اگر پسورد تعیین شده بود و یوزر نیم درست وارد شده بود
-                print("welcome to the Management Panel!")#نمایش پیام خوش آمد گویی
-                admin = ManagementPanel()    # فراخوانی کلاس ادمین کل
-                break
-            else :
-                print("Error wrong password")#در صورت اشتباه بودن پسورد پیام مقابل نمایش داده شود
-                continue
-
-
 class ManagementPanel:#کلاس پنل مدیریت
     def __init__(self):
         self.employees = []  # لیست کارمندها
