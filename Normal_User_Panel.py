@@ -41,5 +41,18 @@ class Normal_User_Panel():
             if not Acceptable_Password(password) :
                 print("Your password must be 8 to 10 characters long and include both letters and numbers, and contain either **&** or **@**.")
                 continue
+
+
+
+        def Menu(self):
+            while True : #تا زمانی که دکمه بازگشت نخوره این حلقه ادامه داره
+                ("Register , \nLogin , \nBack")
+                user_choice = input() #کاربر باید از بین 3 گزینه منو یکی را انتخاب کنه
+                if user_choice == "Register" :
+                    Register()
+                elif user_choice == "Login" :
+                    Login()
+                elif user_choice == "Back" :
+                    break
             
              
