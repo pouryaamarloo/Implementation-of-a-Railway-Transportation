@@ -71,34 +71,59 @@ class ManagementPanel:#کلاس پنل مدیریت
         for e in self.employees:
             if e.username == username:
                 print("Error: The username already exists")
-                return#خروج از متد در صورت تکراری بودن
+                return#خروج از متد در صورت تکراری 
+
+        while True:   
+            password = input("Please enter the employee's password:")  # دریافت پسورد از کاربر
+            pass_pattern= r'^[A-Za-z0-9@&]{6,16}$'
+            if not re.match(pass_pattern,password):
+                print("password must includ :english alphabet,numbers ,@ or & \n and password length must be between 6 and 16 characters")
+                select=int(input("1 : please enter your password again \n 2 : return to the panel"))
+                if select==1:
+                    continue
+                elif select==2:
+                    self.panel()
+                elif select!= 1 and select!=2:
+                    print("please choose between option 1 and 2")
+                    continue
+                else:
+                    break
+        while True:
+            email = input("Please enter the employee's email:")
+            for i in self.employees:
+                if i.email == email:
+                     print("Error: The username already exists")
+                return#خروج از متد در صورت تکراری 
             
-        password = input("Please enter the employee's password:")  # دریافت پسورد از کاربر
-        pass_pattern= r'^[A-Za-z0-9@&]+$'
-        if not re.match(pass_pattern,password):
-            print("password must includ :english alphabet,numbers ,@ or &")
-            return
-        email = input("Please enter the employee's email:")
-        email_pattern=r'^[a-zA-Z0-9_.+-]+@(gmail|yahoo)\.com$'
-        if not re.match(email_pattern,email):
-            print("the email must follow the correct format")
-            return
+            email_pattern=r'^[a-zA-Z0-9_.+-]+@(gmail|yahoo)\.com$'
+            if not re.match(email_pattern,email):
+                print("the email must follow the correct format")
+                select=int(input("1 : please enter your email again \n 2 : return to the panel"))
+                if select==1:
+                    continue
+                elif select==2:
+                    self.panel()
+                elif select!= 1 and select!=2:
+                    print("please choose between option 1 and 2")
+                    continue
+                else:
+                    break
         while True:   
             name = input("Please enter the employee's name:")
             family = input("Please enter the employee's family name:")
             if not name.isalpha() or not family.isalpha():
                 print("name or family name is invalid")
 
-                choice=input("1 : mikhaham dobare vared konam ,2 : bargasht be panel")
+                choice=int(input("1 : mikhaham dobare vared konam ,2 : bargasht be panel"))
                 if choice == 1:
                    continue
                 elif choice == 2:
                     break
         
-            else:
-                emp = Employee(name, family, username, password, email)
-                self.employees.append(emp)
-                print(f"Employee {username} successfully added.")#پیام اضافه کردن کارمند
+            
+        emp = Employee(name, family, username, password, email)
+        self.employees.append(emp)
+        print(f"Employee {username} successfully added.")#پیام اضافه کردن کارمند
 
     def remove_employee(self):
         username = input("Please enter the employee's username:")
