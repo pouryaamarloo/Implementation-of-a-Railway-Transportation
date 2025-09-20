@@ -1,8 +1,5 @@
-from curses.ascii import isdigit
 from logging import exception
 import pyinputplus as pyip
-
-
 
 class Employee():
     def __init__(self):
