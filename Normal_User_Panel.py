@@ -29,21 +29,20 @@ class Normal_User_Panel():
         print("\n*REGISTER*")
         
         while True :
-            self.name = ""
-            name = input("Name :")
+            self.name = input("Name :")
             
-            email = input("Email :")
-            if not Acceptable_Email(email) :
+            self.email = input("Email :")
+            if not Acceptable_Email(self.email) :
                 print("Email is invalid!")
                 continue
         
-            username = input("Username :")
-            if not Acceptable_Username(username) :
+            self.username = input("Username :")
+            if not Acceptable_Username(self.username) :
                 print("Your username must contain letters and numbers and be at least 4 characters long.")
                 continue
 
-            password = input("Password :")
-            if not Acceptable_Password(password) :
+            self.password = input("Password :")
+            if not Acceptable_Password(self.password) :
                 print("Your password must be 8 to 10 characters long and include both letters and numbers, and contain either **&** or **@**.")
                 continue
             
@@ -51,15 +50,14 @@ class Normal_User_Panel():
     def Login(self) :
         print("\n*Login*")
         while True :
-            self.username = ""
-            username = input("Username :")
-            self.password = ""
-            password = input("Password :")
+            self.username = input("Username :")
+            
+            self.password = input("Password :")
             #باید بررسی کنیم که آیا کاربری وجود دارد یا نه
             karbar = None
             #درست بودن یوزر نیم و پسورد را بررسی میکنیم
             for user in self.Users :
-                if user.username == username and user.password == password :
+                if user.username == self.username and user.password == self.password :
                     karbar = user
                     break
             if karbar is not None :
@@ -67,6 +65,9 @@ class Normal_User_Panel():
                 break
             else :
                 print("The username or password is incorrect. Please try again.")
+
+    self.Users = {'Name' : self.name , 'Email' : self.email , 'Username' : self.username , 'Password' : self.password}
+    self.Users.append(self.Users)
 
     def Menu(self):
         while True : #تا زمانی که دکمه بازگشت نخوره این حلقه ادامه داره
