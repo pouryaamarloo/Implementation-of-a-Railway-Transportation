@@ -73,7 +73,7 @@ class ManagementPanel:#کلاس پنل مدیریت
             while True:
                 try:
                     repeat=input("do you want add another user? \n choose 1:yes \n if choose 2:no")
-                    if repeat == 2:
+                    if repeat == 1:
                         break    
                     elif repeat ==2:
                         return
