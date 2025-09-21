@@ -6,11 +6,6 @@ class Normal_User_Panel(Employee):
     def __init__(self):
         super().__init__()
 
-
-class Buy_Ticket(Normal_User_Panel):
-    def __init__(self):
-        super().__init__()
-        self.wallet = 0
         self.detail = [
             {   "train_name" : "306",
                 "line_name"  : "mashhad_tehran",
@@ -23,6 +18,12 @@ class Buy_Ticket(Normal_User_Panel):
 
             }
         ]
+
+
+class Buy_Ticket(Normal_User_Panel):
+    def __init__(self):
+        super().__init__()
+        self.wallet = 500
 
     def buy_ticket(self):
 
@@ -59,6 +60,7 @@ class Buy_Ticket(Normal_User_Panel):
             for i in self.detail:
                 if choice == i['id']:
                     price = i['price']
+                    train_amount = i['amount']
                     if Count > i['amount']:
                         print(
                             "The train capacity is less than what you selected\nif you want to back last panel enter 0")
@@ -95,18 +97,32 @@ class Buy_Ticket(Normal_User_Panel):
 
                 if price <= self.wallet:
                     self.wallet -= price
-
                     print("Purchase completed successfully.")
+                    train_amount = train_amount - Count
+                    for i in self.detail:
+                        if choice == i['id']:
+                            i.update({"amount":train_amount})
+                            file = f""
+                            self.show_data()
+                            return
                 else:
                     print("your balance is less than your ticket price.")
                     return
 
         else:
-            pass
+            self.wallet -= price
+            print("Purchase completed successfully.")
+            train_amount = train_amount - Count
+            for i in self.detail:
+                if choice == i['id']:
+                    i.update({"amount": train_amount})
+                    self.show_data()
+                    return
     def edit_detail(self):
         pass
 
     def show_data(self):
+
 
         while True:
             print("1.buy ticket")
@@ -123,6 +139,7 @@ class Buy_Ticket(Normal_User_Panel):
                 return
             else :
                 print("Invalid input")
+
 
 
 
