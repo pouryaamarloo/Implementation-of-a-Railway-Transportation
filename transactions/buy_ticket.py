@@ -77,3 +77,24 @@ class Buy_Ticket(Normal_User_Panel):
                     self.wallet -= price
         else:
             pass
+    def edit_detail(self):
+        pass
+
+    def show_data(self):
+
+        while True:
+            print("1.buy ticket")
+            print("2.edit detail")
+            print("3.exit")
+            result = input()
+            if result == "1":
+                self.buy_ticket()
+                break
+            if result == "2":
+                self.edit_detail()
+                break
+            if result == "3":
+                pass
+            else :
+                print("Invalid input")
+
