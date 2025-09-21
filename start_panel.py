@@ -1,4 +1,4 @@
-from admin_kol import *
+
 def start_panel():
     '''
     پنل شروع جهت فراخوانی پنل های متفاوت از قبیل

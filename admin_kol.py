@@ -3,113 +3,116 @@ import re
 class ManagementPanel:#کلاس پنل مدیریت
     def __init__(self):
         self.employees = []  # لیست کارمندها
-        self.name = ""       #تعریف آرگمان ها
-        self.family = ""
-        self.username = ""
-        self.password = ""
-        self.email = ""
 
+    def add_employee(self):#متد اضافه کردن کارمند قطار
 
+        while True:#حلقه برای گرفتن یوزرنیم
+            username = input("Enter username: ").strip()#یوزرنیم وارد میشود و فاصلخ اضافی ان حذف میشود
+            if any(emp["username"] == username for emp in self.employees):#با استفاده از این تابع بررسی میشود که ایمیل وجود داشته یا نه
+                print("Error: Username already exists")#در صورت تکراری بودن پیام خطا چاپ میشودو ادامه میابد
+                continue
+            break#در صورت  وجود نداشتن مشکل از حلقه خارج میشود
 
-    def add_employee(self):#متد پنل اضافه کردن کارمند قطار
-        username = input("Please enter the employee's username:")#دریافت یوزرنیم از کاربر
         
-        # بررسی تکراری بودن username
-        for e in self.employees:
-            if e.username == username:
-                print("Error: The username already exists")
-                return#خروج از متد در صورت تکراری 
+        while True:#حلقه گرفتن پسورد
+            password = input("Enter password: ").strip()#پسورد وارد میشود و فاصله اضافی ان حذف میشود
+            if not re.match(r'^[A-Za-z0-9@&]{6,16}$', password):
+            #با استفاده از ریجکس بررسی میشود که پسورد شامل حروف انگلیسی عدد @ یا & باشد و طولش بین 6 تا 16 کاراکتر باشد    
+                print("Password must include letters, numbers, @ or & and length 6-16")# صدا زده میشود retry_or_return  در صورت خطا پیام چاپ شده و متد
+                continue_choice = self.retry_or_return()
+                if continue_choice == "return":
+                    return
+                #اگر کاربر برگشت را انتخاب کند برگردد
+                else:#در غیر این صورت حلقه ادامه میابد
+                    continue
+            break
 
-        while True:   
-            password = input("Please enter the employee's password:")  # دریافت پسورد از کاربر
-            pass_pattern= r'^[A-Za-z0-9@&]{6,16}$'
-            if not re.match(pass_pattern,password):
-                print("password must includ :english alphabet,numbers ,@ or & \n and password length must be between 6 and 16 characters")
-                select=int(input("1 : please enter your password again \n 2 : return to the panel"))
-                if select==1:
+       
+        while True:#حلقه گرفتن ایمیل
+            email = input("Enter email: ").strip()#ایمیل وارد میشود و فاصله اضافی آن حذف میشود
+            if any(emp["email"] == email for emp in self.employees):#بررسی میشود که ایمیل وجود داشته یا نه
+                print("Error: Email already exists")
+                continue
+            if not re.match(r'^[a-zA-Z0-9_.+-]+@(gmail|yahoo)\.com$', email):#gmail/yahoo با استفاده از ریجکس بررسی میشود که ایمیل از دو فرمت رو به رو باشد
+                print("Email must be in correct format (gmail/yahoo)")#در صورت اشتباه پیام خطا چاپ میشود
+                continue_choice = self.retry_or_return()
+                if continue_choice == "return":#دوباره گزینه برگشت پرسیده شود 
+                    return
+                else:#در غیر این صورت حلقه ادامه میابد
                     continue
-                elif select==2:
-                    self.panel()
-                elif select!= 1 and select!=2:
-                    print("please choose between option 1 and 2")
-                    continue
+            break
+
+       
+        while True:#حلقه گرفتن نام و نام خانوادگی
+            name = input("Enter name: ").strip()#نام وارد شده و فاصله اضافه ان حذف میشود
+            family = input("Enter family: ").strip()#نام خانوادگی وارد شده و فاصله اضافه ان حذف میشود
+            if not name.isalpha() or not family.isalpha():#بررسی میکند که فقط حروف وارد شده باشد
+                print("Name and family must only contain letters")
+                continue_choice = self.retry_or_return()
+                if continue_choice == "return":#اگر  اشتباه بود همان روال برگشت اعمال میشود
+                    return
                 else:
-                    break
+                    continue
+            break
+
+        # اضافه کردن کارمند به لیست
+        emp = {
+            "username": username,
+            "password": password,
+            "email": email,
+            "name": name,
+            "family": family
+        }
+        #بعد از وارد کردن تمام اطلاعات درست یک دیکشنری ساخته میشود که اطلاعات کارمند را نگه میدارد
+        self.employees.append(emp)#دیکشنری ساخته شده به لیست کارمندان اضافه میشود
+        print(f"Employee {username} added successfully.")#پیام اضافه شدن موفقیت آمیز کارمند نشان داده میشود
+
+    def retry_or_return(self):#متد کمکی برای خروج یا تلاش دوباره
         while True:
-            email = input("Please enter the employee's email:")
-            for i in self.employees:
-                if i.email == email:
-                     print("Error: The username already exists")
-                return#خروج از متد در صورت تکراری 
-            
-            email_pattern=r'^[a-zA-Z0-9_.+-]+@(gmail|yahoo)\.com$'
-            if not re.match(email_pattern,email):
-                print("the email must follow the correct format")
-                select=int(input("1 : please enter your email again \n 2 : return to the panel"))
-                if select==1:
-                    continue
-                elif select==2:
-                    self.panel()
-                elif select!= 1 and select!=2:
-                    print("please choose between option 1 and 2")
-                    continue
-                else:
-                    break
-        while True:   
-            name = input("Please enter the employee's name:")
-            family = input("Please enter the employee's family name:")
-            if not name.isalpha() or not family.isalpha():
-                print("name or family name is invalid")
-
-                choice=int(input("1 : mikhaham dobare vared konam ,2 : bargasht be panel"))
+            try:
+                choice = int(input("1: retry  2: return to panel: "))#انتخاب 1 به معنای تلاش دوباره و 2 به معنای برگشت به پنل اصلی میباشد
                 if choice == 1:
-                   continue
+                    return "retry"
                 elif choice == 2:
-                    break
-        
-            
-        emp = Employee(name, family, username, password, email)
-        self.employees.append(emp)
-        print(f"Employee {username} successfully added.")#پیام اضافه کردن کارمند
+                    return "return"
+                else:
+                    print("Choose 1 or 2")#در صورت ورود عدد غیر از 1 و 2 درخواست میشود ورودی 1 یا 2 باشد
+            except ValueError:#در صورت ورودی غیر عددی اکسپشن پرت شده و درخواست میشود عدد وارد شود
+                print("Invalid input! Enter a number.")
 
-    def remove_employee(self):
-        username = input("Please enter the employee's username:")
-        # بررسی وجود username
-        for e in self.employees:
-            if e.username == username:
-                self.employees.remove(e)
-                print(f"Employee {username} has been successfully deleted")#پیام حذف کارمند
+    def remove_employee(self):#متد حذف کارمند قطار 
+        username = input("Enter username to remove: ").strip()#گرفتن یوزر نیم جهت حذف کارمند و حذف فاصله اضافه
+        for emp in self.employees:
+            if emp["username"] == username:#اگر یوزرنیم وارد شده وجود داشت
+                self.employees.remove(emp)#کارمند حذف میشود
+                print(f"Employee {username} removed successfully.")#پیام موفقیت در حذف چاپ میشود
                 return
-        print("Error: Employee not found!")
+        print("Error: Employee not found!")#اگر یوزر نیم پیدا نشد پیام نشان داده شود
 
-    def list_employees(self):
-        if not self.employees:
-            print("Employee not found!")
-        for e in self.employees:
-            print(f"Username: {e.username}, Name: {e.name} {e.family}")
+    def list_employees(self):#متد نمایش تمام کارمندان
+        if not self.employees:#اگر لیست خالی باشد
+            print("No employees found.")#پیام نمایش داده شود
+            return
+        for emp in self.employees:#در غیر این صورت اطلاعات هر کارمند چاپ شود
+            print(f"Username: {emp['username']}, Name: {emp['name']} {emp['family']}, Email: {emp['email']}")
 
     def panel(self):  # متد انتخاب پنل توسط کاربر
         while True:
-            print("1:add employee")
-            print("2:remove employee")
-            print("3:show employee's list")
-            print("4:exit to start panel")
+            print("\n1: Add employee\n2: Remove employee\n3: Show employees\n4: Exit")#نمایش گزینه ها به کاربر 
+            choice = input("Choose option: ").strip()#ورودی اعداد صحیح بین 1 تا 4 گرفته میشود
 
-            choice = input()
-            if choice == "1":  # اگر عدد 1 وارد شد
-                self.add_employee()  # باز شدن پنل اضافه کردن کارمند قطار
-                break
+            if choice == "1":
+                self.add_employee()#وارد پنل اضافه کردن کارمند میشود
 
-            elif choice == "2":  # اگر عدد 2 وارد شد
-                self.remove_employee()  # باز شدن پنل حذف کارمند قطار
-                break
+            elif choice == "2":
+                self.remove_employee()#وارد پنل حذف کارمند میشود
 
-            elif choice == "3":  # اگر عدد 3 وارد شد
-                self.list_employees()  # باز شدن پنل نمایش لیست کارمندان قطار
-                break
-            elif choice == "4":  # اگر عدد 4 وارد شد
-                start_panel()
-                break  # خروج از پنل مدیریت
+            elif choice == "3":
+                self.list_employees()#وارد پنل اضافه کردن لیست میشود
 
+            elif choice == "4":
+                print("Exiting panel...")#از پنل ادمین کل خارج میشود
+                return
+            
             else:
-                print("invalid choice")  # در صورت انتخاب اعداد غیر از اعداد 1 تا 4 این پیام نمایش داده شود
+                print("Invalid choice, enter 1-4")# در صورت ورود اعداد صحیح غیر از 1 تا 4 خواسته میشود عددی بین اینها وارد شود
