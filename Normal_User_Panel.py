@@ -9,44 +9,66 @@ class Normal_User_Panel():
 
         self.Users = [] #برای ذخیره کردن کاربر
     #باید قبل از گرفتن اطلاعات با ریجکس ایمیل و یوزرنیم و پسورد رو بررسی کنیم
-    def Acceptable_Email(email) :
+    def acceptable_Email(email) :
         patern = r'^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$'
         correct_email = re.match(patern , email)
         return correct_email
     
-    def Acceptable_Password(password) :
-        patern = r'^(?=.*[a-zA-z])(?=.*\d)(?=.*[@&]){8 , 10}'
+    def acceptable_Password(password) :
+        patern = r'^(?=.*[a-zA-z]\d)(?=.*[@&]){8,10}'
         correct_pass = re.match(patern , password)
         return correct_pass
     
-    def Acceptable_Username(username) :
-        patern = r'^(?=.*[a-zA-z])(?=.*\d){4 , 10}$'
+    def acceptable_Username(username) :
+        patern = r'^(?=.*[a-zA-z])(?=.*\d){4,10}$'
         correct_username = re.match(patern , username)
         return correct_username
+
     
     
     def Register(self) :
         print("\n*REGISTER*")
         
+        email_dict = {}
+        username_dict = {}
+        
         while True :
             self.name = input("Name :")
             
             self.email = input("Email :")
-            if not Acceptable_Email(self.email) :
+            if not acceptable_Email(self.email) :
                 print("Email is invalid!")
+                continue
+
+            if self.email in email_dict : #تکراری بودن ایمیل بررسی میشه
+                print("This email is already in use.")
                 continue
         
             self.username = input("Username :")
-            if not Acceptable_Username(self.username) :
+            if not acceptable_Username(self.username) :
                 print("Your username must contain letters and numbers and be at least 4 characters long.")
                 continue
 
-            self.password = input("Password :")
-            if not Acceptable_Password(self.password) :
-                print("Your password must be 8 to 10 characters long and include both letters and numbers, and contain either **&** or **@**.")
+            if self.username in username_dict : #تکراری بودن یوزرنیم بررسی میشه
+                print("This username is already in use.")
                 continue
+
+            self.password = input("Password :")
+            if not acceptable_Password(self.password) :
+                print("Your password must be 8 to 10 characters long and include both letters and numbers, and contain either (&) or (@).")
+                continue
+
+            new_user = Users(self.name , self.email , self.username , self.password)  #برای ثبت کردن کاربر جدید
+            Users.append(new_user) 
             
-            #تکراری بودن ایمیل و یوزر بررسی بشه!!
+        #حالا باید برای اینکه کاربر در دیکشنری اضافه بشه برای بررسی های بعدی
+            email_dict[self.email]= True
+            username_dict[self.username] = True
+
+            print("Registration was successful.")
+            break
+
+
     def Login(self) :
         print("\n*Login*")
         while True :
@@ -66,8 +88,8 @@ class Normal_User_Panel():
             else :
                 print("The username or password is incorrect. Please try again.")
 
-    self.Users = {'Name' : self.name , 'Email' : self.email , 'Username' : self.username , 'Password' : self.password}
-    self.Users.append(self.Users)
+        self.Users = {'Name' : self.name , 'Email' : self.email , 'Username' : self.username , 'Password' : self.password}
+        self.Users.append(self.Users)
 
     def Menu(self):
         while True : #تا زمانی که دکمه بازگشت نخوره این حلقه ادامه داره
@@ -80,4 +102,3 @@ class Normal_User_Panel():
             elif user_choice == "Back" :
                 break
             
-             
