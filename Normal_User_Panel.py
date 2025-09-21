@@ -58,7 +58,13 @@ class Normal_User_Panel():
                 print("Your password must be 8 to 10 characters long and include both letters and numbers, and contain either (&) or (@).")
                 continue
 
-            new_user = {'Name' : self.name , 'Email' : self.email , 'Username' : self.username , 'Password' : self.password}  #برای ثبت کردن کاربر جدید
+            new_user = {
+                'Name' : self.name , 
+                'Email' : self.email , 
+                'Username' : self.username , 
+                'Password' : self.password
+                }  #برای ثبت کردن کاربر جدید
+            
             self.Users.append(new_user) 
             
         #حالا باید برای اینکه کاربر در دیکشنری اضافه بشه برای بررسی های بعدی
@@ -66,6 +72,8 @@ class Normal_User_Panel():
             username_dict[self.username] = True
 
             print("Registration was successful.")
+            
+            
             break
 
 
@@ -88,10 +96,15 @@ class Normal_User_Panel():
             else :
                 print("The username or password is incorrect. Please try again.")
 
+        select_user = input("Please choose one of these two options : 1. Back , \n2.Buy_Ticket")
+        if select_user == "Back" :
+            break
+        elif select_user == "But_Ticket" :
+
+
         self.Users = {'Name' : self.name , 'Email' : self.email , 'Username' : self.username , 'Password' : self.password}
         self.Users.append(self.Users)
 
-        #باید قسمت بازگشت هم بزارم****
 
     def Menu(self):
         while True : #تا زمانی که دکمه بازگشت نخوره این حلقه ادامه داره
