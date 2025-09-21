@@ -71,7 +71,7 @@ class Normal_User_Panel():
 
     def Menu(self):
         while True : #تا زمانی که دکمه بازگشت نخوره این حلقه ادامه داره
-            ("Register , \nLogin , \nBack")
+            print("Register , \nLogin , \nBack")
             user_choice = input() #کاربر باید از بین 3 گزینه منو یکی را انتخاب کنه
             if user_choice == "Register" :
                 Register()
