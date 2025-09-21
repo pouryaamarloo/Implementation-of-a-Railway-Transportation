@@ -42,7 +42,10 @@ class Employee():
                 except ValueError:
                     print("لطفاً یک عدد صحیح وارد کنید.")
                     continue
-
+                if self.count <= 0:
+                    print("عدد باید بزرگتر از صفر باشد. لطفاً دوباره وارد کنید.")
+                    continue
+                
                 self.list_line = []
                 for i in range(self.count):
                     station_name = input(f"نام ایستگاه {i+1}: ")
