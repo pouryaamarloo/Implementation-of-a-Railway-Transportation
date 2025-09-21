@@ -173,8 +173,7 @@ class Employee():
                 print("this number is out of range")
                 print("try again")
 
+            
 
 
-pourya = Employee()
-pourya.panel_employee()
 
