@@ -10,9 +10,13 @@ class ManagementPanel:#کلاس پنل مدیریت
             username = input("Enter username: ").strip()#یوزرنیم وارد میشود و فاصلخ اضافی ان حذف میشود
             if any(emp["username"] == username for emp in self.employees):#با استفاده از این تابع بررسی میشود که ایمیل وجود داشته یا نه
                 print("Error: Username already exists")#در صورت تکراری بودن پیام خطا چاپ میشودو ادامه میابد
-                continue
-            break#در صورت  وجود نداشتن مشکل از حلقه خارج میشود
-
+                continue_choice = self.retry_or_return()
+                if continue_choice == "return":
+                    return
+                #اگر کاربر برگشت را انتخاب کند برگردد
+                else:#در غیر این صورت حلقه ادامه میابد
+                    continue
+            break
         
         while True:#حلقه گرفتن پسورد
             password = input("Enter password: ").strip()#پسورد وارد میشود و فاصله اضافی ان حذف میشود
