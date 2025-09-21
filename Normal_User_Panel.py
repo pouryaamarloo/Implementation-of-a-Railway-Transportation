@@ -15,12 +15,12 @@ class Normal_User_Panel():
         return correct_email
     
     def acceptable_Password(password) :
-        patern = r'^(?=.*[a-zA-z]\d)(?=.*[@&]){8,10}'
+        patern = r'^(?=.*[a-zA-z])(?=.*\d)(?=.*[@&]){8,10}'
         correct_pass = re.match(patern , password)
         return correct_pass
     
     def acceptable_Username(username) :
-        patern = r'^(?=.*[a-zA-z])(?=.*\d){4,10}$'
+        patern = r'^(?=.*[a-zA-z0-9]{4,10}$'
         correct_username = re.match(patern , username)
         return correct_username
 
@@ -58,8 +58,8 @@ class Normal_User_Panel():
                 print("Your password must be 8 to 10 characters long and include both letters and numbers, and contain either (&) or (@).")
                 continue
 
-            new_user = Users(self.name , self.email , self.username , self.password)  #برای ثبت کردن کاربر جدید
-            Users.append(new_user) 
+            new_user = {'Name' : self.name , 'Email' : self.email , 'Username' : self.username , 'Password' : self.password}  #برای ثبت کردن کاربر جدید
+            self.Users.append(new_user) 
             
         #حالا باید برای اینکه کاربر در دیکشنری اضافه بشه برای بررسی های بعدی
             email_dict[self.email]= True
@@ -90,6 +90,8 @@ class Normal_User_Panel():
 
         self.Users = {'Name' : self.name , 'Email' : self.email , 'Username' : self.username , 'Password' : self.password}
         self.Users.append(self.Users)
+
+        #باید قسمت بازگشت هم بزارم****
 
     def Menu(self):
         while True : #تا زمانی که دکمه بازگشت نخوره این حلقه ادامه داره
