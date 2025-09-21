@@ -5,71 +5,84 @@ class ManagementPanel:#کلاس پنل مدیریت
         self.employees = []  # لیست کارمندها
 
     def add_employee(self):#متد اضافه کردن کارمند قطار
-
-        while True:#حلقه برای گرفتن یوزرنیم
-            username = input("Enter username: ").strip()#یوزرنیم وارد میشود و فاصلخ اضافی ان حذف میشود
-            if any(emp["username"] == username for emp in self.employees):#با استفاده از این تابع بررسی میشود که ایمیل وجود داشته یا نه
-                print("Error: Username already exists")#در صورت تکراری بودن پیام خطا چاپ میشودو ادامه میابد
-                continue_choice = self.retry_or_return()
-                if continue_choice == "return":
-                    return
-                #اگر کاربر برگشت را انتخاب کند برگردد
-                else:#در غیر این صورت حلقه ادامه میابد
-                    continue
-            break
+        while True:
+            while True:#حلقه برای گرفتن یوزرنیم
+                username = input("Enter username: ").strip()#یوزرنیم وارد میشود و فاصلخ اضافی ان حذف میشود
+                if any(emp["username"] == username for emp in self.employees):#با استفاده از این تابع بررسی میشود که ایمیل وجود داشته یا نه
+                    print("Error: Username already exists")#در صورت تکراری بودن پیام خطا چاپ میشودو ادامه میابد
+                    continue_choice = self.retry_or_return()
+                    if continue_choice == "return":
+                        return
+                    #اگر کاربر برگشت را انتخاب کند برگردد
+                    else:#در غیر این صورت حلقه ادامه میابد
+                        continue
+                break
         
-        while True:#حلقه گرفتن پسورد
-            password = input("Enter password: ").strip()#پسورد وارد میشود و فاصله اضافی ان حذف میشود
-            if not re.match(r'^[A-Za-z0-9@&]{6,16}$', password):
-            #با استفاده از ریجکس بررسی میشود که پسورد شامل حروف انگلیسی عدد @ یا & باشد و طولش بین 6 تا 16 کاراکتر باشد    
-                print("Password must include letters, numbers, @ or & and length 6-16")# صدا زده میشود retry_or_return  در صورت خطا پیام چاپ شده و متد
-                continue_choice = self.retry_or_return()
-                if continue_choice == "return":
-                    return
-                #اگر کاربر برگشت را انتخاب کند برگردد
-                else:#در غیر این صورت حلقه ادامه میابد
-                    continue
-            break
+            while True:#حلقه گرفتن پسورد
+                password = input("Enter password: ").strip()#پسورد وارد میشود و فاصله اضافی ان حذف میشود
+                if not re.match(r'^[A-Za-z0-9@&]{6,16}$', password):
+                #با استفاده از ریجکس بررسی میشود که پسورد شامل حروف انگلیسی عدد @ یا & باشد و طولش بین 6 تا 16 کاراکتر باشد    
+                    print("Password must include letters, numbers, @ or & and length 6-16")# صدا زده میشود retry_or_return  در صورت خطا پیام چاپ شده و متد
+                    continue_choice = self.retry_or_return()
+                    if continue_choice == "return":
+                        return
+                    #اگر کاربر برگشت را انتخاب کند برگردد
+                    else:#در غیر این صورت حلقه ادامه میابد
+                        continue
+                break
 
        
-        while True:#حلقه گرفتن ایمیل
-            email = input("Enter email: ").strip()#ایمیل وارد میشود و فاصله اضافی آن حذف میشود
-            if any(emp["email"] == email for emp in self.employees):#بررسی میشود که ایمیل وجود داشته یا نه
-                print("Error: Email already exists")
-                continue
-            if not re.match(r'^[a-zA-Z0-9_.+-]+@(gmail|yahoo)\.com$', email):#gmail/yahoo با استفاده از ریجکس بررسی میشود که ایمیل از دو فرمت رو به رو باشد
-                print("Email must be in correct format (gmail/yahoo)")#در صورت اشتباه پیام خطا چاپ میشود
-                continue_choice = self.retry_or_return()
-                if continue_choice == "return":#دوباره گزینه برگشت پرسیده شود 
-                    return
-                else:#در غیر این صورت حلقه ادامه میابد
+            while True:#حلقه گرفتن ایمیل
+                email = input("Enter email: ").strip()#ایمیل وارد میشود و فاصله اضافی آن حذف میشود
+                if any(emp["email"] == email for emp in self.employees):#بررسی میشود که ایمیل وجود داشته یا نه
+                    print("Error: Email already exists")
                     continue
-            break
+                if not re.match(r'^[a-zA-Z0-9_.+-]+@(gmail|yahoo)\.com$', email):#gmail/yahoo با استفاده از ریجکس بررسی میشود که ایمیل از دو فرمت رو به رو باشد
+                    print("Email must be in correct format (gmail/yahoo)")#در صورت اشتباه پیام خطا چاپ میشود
+                    continue_choice = self.retry_or_return()
+                    if continue_choice == "return":#دوباره گزینه برگشت پرسیده شود 
+                        return
+                    else:#در غیر این صورت حلقه ادامه میابد
+                        continue
+                break
 
-       
-        while True:#حلقه گرفتن نام و نام خانوادگی
-            name = input("Enter name: ").strip()#نام وارد شده و فاصله اضافه ان حذف میشود
-            family = input("Enter family: ").strip()#نام خانوادگی وارد شده و فاصله اضافه ان حذف میشود
-            if not name.isalpha() or not family.isalpha():#بررسی میکند که فقط حروف وارد شده باشد
-                print("Name and family must only contain letters")
-                continue_choice = self.retry_or_return()
-                if continue_choice == "return":#اگر  اشتباه بود همان روال برگشت اعمال میشود
-                    return
-                else:
-                    continue
-            break
+        
+            while True:#حلقه گرفتن نام و نام خانوادگی
+                name = input("Enter name: ").strip()#نام وارد شده و فاصله اضافه ان حذف میشود
+                family = input("Enter family: ").strip()#نام خانوادگی وارد شده و فاصله اضافه ان حذف میشود
+                if not name.isalpha() or not family.isalpha():#بررسی میکند که فقط حروف وارد شده باشد
+                    print("Name and family must only contain letters")
+                    continue_choice = self.retry_or_return()
+                    if continue_choice == "return":#اگر  اشتباه بود همان روال برگشت اعمال میشود
+                        return
+                    else:
+                        continue
+                break
 
-        # اضافه کردن کارمند به لیست
-        emp = {
-            "username": username,
-            "password": password,
-            "email": email,
-            "name": name,
-            "family": family
-        }
-        #بعد از وارد کردن تمام اطلاعات درست یک دیکشنری ساخته میشود که اطلاعات کارمند را نگه میدارد
-        self.employees.append(emp)#دیکشنری ساخته شده به لیست کارمندان اضافه میشود
-        print(f"Employee {username} added successfully.")#پیام اضافه شدن موفقیت آمیز کارمند نشان داده میشود
+            # اضافه کردن کارمند به لیست
+            emp = {
+                "username": username,
+                "password": password,
+                "email": email,
+                "name": name,
+                "family": family
+            }
+            #بعد از وارد کردن تمام اطلاعات درست یک دیکشنری ساخته میشود که اطلاعات کارمند را نگه میدارد
+            self.employees.append(emp)#دیکشنری ساخته شده به لیست کارمندان اضافه میشود
+            print(f"Employee {username} added successfully.")#پیام اضافه شدن موفقیت آمیز کارمند نشان داده میشود
+            while True:
+                try:
+                    repeat=input("do you want add another user? \n choose 1:yes \n if choose 2:no")
+                    if repeat == 2:
+                        break    
+                    elif repeat ==2:
+                        return
+                    else:
+                        print("Choose 1 or 2")
+                except ValueError:
+                    print("Invalid input! Enter a number.")
+
+
 
     def retry_or_return(self):#متد کمکی برای خروج یا تلاش دوباره
         while True:
