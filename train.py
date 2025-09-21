@@ -10,14 +10,6 @@ class Employee():
         self.Count = 0
         self.list_lines = []
 
-        self.train_name = ""
-        self.line = ""
-        self.speed = 0
-        self.wait = 0
-        self.rate = 0
-        self.price = 0
-        self.amount = 0
-        self.detail = []
 
 
     def add_line(self):
