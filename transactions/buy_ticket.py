@@ -1,6 +1,7 @@
 from bank import API
 from train_employe import *
 import pyinputplus as pyip
+import datetime as dt
 
 class Normal_User_Panel(Employee):
     def __init__(self):
@@ -18,7 +19,6 @@ class Normal_User_Panel(Employee):
 
             }
         ]
-
 
 class Buy_Ticket(Normal_User_Panel):
     def __init__(self):
@@ -123,7 +123,6 @@ class Buy_Ticket(Normal_User_Panel):
 
     def show_data(self):
 
-
         while True:
             print("1.buy ticket")
             print("2.edit detail")
@@ -139,8 +138,6 @@ class Buy_Ticket(Normal_User_Panel):
                 return
             else :
                 print("Invalid input")
-
-
 
 
 
@@ -178,7 +175,12 @@ class Transaction(Buy_Ticket):
 
             return amount
 
-
+def create_file(list_):
+    Count = 0
+    for i in list_:
+        Count += 1
+        with open(f"file/{i['username']}") as f :
+            f.write(f"")
 
 pir = Buy_Ticket()
 pir.show_data()
