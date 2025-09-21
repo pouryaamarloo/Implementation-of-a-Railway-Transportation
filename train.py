@@ -51,6 +51,20 @@ class Employee():
                     station_name = input(f"نام ایستگاه {i+1}: ")
                     self.list_line.append(station_name)
 
+
+                total_distance = 0
+                    for i in range(len(self.list_line) - 1):
+                        while True:
+                            try:
+                                dist = float(input(f"فاصله بین ایستگاه '{self.list_line[i]}' و '{self.list_line[i+1]}' (کیلومتر): "))
+                                if dist < 0:
+                                    print("فاصله نمی‌تواند منفی باشد. دوباره وارد کنید.")
+                                    continue
+                                total_distance += dist
+                                break
+                            except ValueError:
+                                print("لطفا عدد صحیح یا اعشاری وارد کنید.")
+                    print(f"مسافت کل طی شده: {total_distance} کیلومتر")
                 self.lines[self.line_name] = {
                     'مبدا': self.start,
                     'مقصد': self.end,
