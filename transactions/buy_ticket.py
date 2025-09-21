@@ -89,10 +89,17 @@ class Buy_Ticket(Normal_User_Panel):
                 user = Transaction()
                 print("Please enter the amount of money you want to deposit into your wallet.")
                 num = check_int()
-                user.deposit(num)
-                print(f"your wallet balance is {self.wallet}")
+                amount =user.deposit(num)
+                self.wallet += amount
+                print(f"Your wallet balance is {self.wallet}")
+
                 if price <= self.wallet:
                     self.wallet -= price
+
+                    print("Purchase completed successfully.")
+                else:
+                    print("your balance is less than your ticket price.")
+                    return
 
         else:
             pass
@@ -116,6 +123,9 @@ class Buy_Ticket(Normal_User_Panel):
                 return
             else :
                 print("Invalid input")
+
+
+
 
 class Transaction(Buy_Ticket):
     def __init__(self):
@@ -148,17 +158,9 @@ class Transaction(Buy_Ticket):
         Valid = API ()
         flag = Valid.pay(card,exp_moth,exp_year,password,cvv2,amount)
         if flag:
-            self.wallet += amount
-            print(f"your wallet balance is {self.wallet}")
-            again = pyip.inputYesNo(prompt=" Do you want deposit again ? (y/n) ")
 
-            if again == "Y":
-                print("please enter the amount of money you want to deposit into your wallet.")
-                amount = check_int()
-                self.deposit(amount)
+            return amount
 
-            else:
-                return
 
 
 pir = Buy_Ticket()
