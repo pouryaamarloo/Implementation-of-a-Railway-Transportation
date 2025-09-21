@@ -96,15 +96,16 @@ class Normal_User_Panel():
             else :
                 print("The username or password is incorrect. Please try again.")
 
-        select_user = input("Please choose one of these two options : 1. Back , \n2.Buy_Ticket")
-        if select_user == "Back" :
-            break
-        elif select_user == "But_Ticket" :
-
-
         self.Users = {'Name' : self.name , 'Email' : self.email , 'Username' : self.username , 'Password' : self.password}
         self.Users.append(self.Users)
 
+        while True :
+            select_user = input("Please choose one of these two options : 1. Back to the Menu , \n2.Buy_Ticket")
+            if select_user == "Back to the Menu" :
+                break
+            elif select_user == "Buy_Ticket" :
+                print("Welcome to the Buy_Ticket Panel")
+                
 
     def Menu(self):
         while True : #تا زمانی که دکمه بازگشت نخوره این حلقه ادامه داره
