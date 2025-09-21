@@ -10,6 +10,7 @@ class Employee():
         self.Count = 0
         self.list_lines = []
 
+
         self.train_name = ""
         self.line = ""
         self.speed = 0
@@ -18,6 +19,7 @@ class Employee():
         self.price = 0
         self.amount = 0
         self.detail = []
+        self.id_= 300
 
 
     def add_line(self):
@@ -88,7 +90,7 @@ class Employee():
         print("لطفا ظرفیت را وارد کنید :")
         if self.amount == 0 :
             self.panel_employee()
-        id_ = len(self.detail)+1
+        self.id_ += 1
 
         dict_ = dict(train_name = self.train_name,line_name = self.line_name,
                      speed = self.speed,wait = self.wait,
@@ -98,9 +100,10 @@ class Employee():
         select_= pyip.inputInt(min= 0 , max =1)
         if select_ == 0:
             self.panel_employee()
+            return
         else :
             self.add_train()
-
+            return
     def delete_train(self):
         list_ = []
         while True:
@@ -118,8 +121,7 @@ class Employee():
         for i in self.detail :
             if i["id"] == id_ :
                 self.detail.remove(i)
-
-
+                return
 
 
     def list_train(self):

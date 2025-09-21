@@ -1,5 +1,6 @@
 #from admin_kol import *
 from train_employe import *
+
 def start_panel():
     '''
     پنل شروع جهت فراخوانی پنل های متفاوت از قبیل
