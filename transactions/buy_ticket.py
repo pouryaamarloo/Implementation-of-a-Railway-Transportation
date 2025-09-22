@@ -1,5 +1,4 @@
 from bank import API
-from test import exp_month
 from train_employe import Employee
 import pyinputplus as pyip
 import datetime as dt
@@ -30,6 +29,7 @@ class Normal_User_Panel(Employee):
             }
         ]
 
+
 class Buy_Ticket(Normal_User_Panel):
     def __init__(self):
         super().__init__()
@@ -48,6 +48,10 @@ class Buy_Ticket(Normal_User_Panel):
                     continue
                 if choice:
                     return choice
+
+        def time_micro(now):
+            now_no_micro = now.replace(microsecond=0)
+            return now_no_micro
 
         user = Transaction()
 
@@ -122,16 +126,53 @@ class Buy_Ticket(Normal_User_Panel):
                         for i in self.detail:
                             if choice == i['id']:
                                 i.update({"amount":train_amount})
-                                dict_ =dict(train_name=i['train_name'],id=i['id'],line_name=i['line_name'],price=i['price'],Count=Count)
+                                time = dt.datetime.now()
+                                time = time_micro(time)
+                                dict_ =dict(user_name = self.username,train_name=i['train_name'],id=i['id'],line_name=i['line_name'],price=i['price'],Count=Count , time=time)
+                                self.tickets.append(dict_)
+                                STR=f"""
+                                    Name       : {dict_['user_name']}
+                                    Train Name : {dict_['train_name']}
+                                    id         : {dict_['id']}
+                                    line_name  : {dict_['line_name']}
+                                    price      : {dict_['price']}
+                                    count      : {dict_['Count']}
+                                    time       : {dict_['time']}
+                                    
+                                """
+                                with open("file/tickets.txt","w+") as f:
+                                    f.write(STR)
+                                    f.seek(0)
+                                    f.read()
 
                                 self.show_data()
                                 return
                     else:
                             continue
 
-
     def edit_detail(self):
-        pass
+        def show_list_detail():#show list of information about user
+            for i in self.User:
+                if i['username'] == self.username:
+                    print(f"""
+                    "Name" : {i["Name"]},
+                    "Email" : {i["Email"]},
+                    "Username" : {i["Username"]},
+                    "Password" : {i['password']},
+                    "card"     :{i["card"]},
+                    """)
+        def change_detail(title): # edit information
+            for i in self.User:
+                if i[title] :
+                    a = input("Apply the changes.")
+                    i.update({title:a})
+                else:
+                    print(f"{title} not found.")
+
+
+        show_list_detail()
+        title= input("Which part do you want to change?")
+        change_detail(title)
 
     def show_data(self):
 
@@ -201,9 +242,6 @@ class Transaction(Buy_Ticket):
                 if j["Username"] == self.username:
                     j["card"].update({"card":card,"exp_month":exp_month,"exp_year":exp_year,"password":password ,"cvv2":cvv2})
             print(self.User)
-
-
-
 
             return amount
 

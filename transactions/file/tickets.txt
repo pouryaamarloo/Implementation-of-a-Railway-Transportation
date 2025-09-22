@@ -1,0 +1,10 @@
+
+                                    Name       : [{'Name': 'pourya', 'Email': 'pourya@gmail.com', 'Username': 'pouryaam', 'Password': '123456#@', 'card': {}}]
+                                    Train Name : 306
+                                    id         : 3
+                                    line_name  : mashhad_tehran
+                                    price      : 100
+                                    count      : 20
+                                    time       : 2025-09-22 23:04:17
+                                    
+                                
