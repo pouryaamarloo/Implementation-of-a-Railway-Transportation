@@ -1,4 +1,5 @@
-import re #چون باید باید از Regex استفاده بشه
+import re # Using regex
+
 
 class Normal_User_Panel():
     def __init__(self ):
@@ -7,8 +8,9 @@ class Normal_User_Panel():
         self.username = ""
         self.password = ""
 
-        self.Users = [] #برای ذخیره کردن کاربر
-    #باید قبل از گرفتن اطلاعات با ریجکس ایمیل و یوزرنیم و پسورد رو بررسی کنیم
+        self.Users = [] #To save the user
+#We need to check email, username, and password with regex before getting the information.
+
     def Acceptable_Email(email) :
         patern = r'^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$'
         correct_email = re.match(patern , email)
