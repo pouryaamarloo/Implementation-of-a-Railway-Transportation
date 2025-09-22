@@ -9,7 +9,7 @@ class Normal_User_Panel :   #کلاس کاربران عادی
 
     def acceptable_Email(self, email) :    #متد اعتبارسنجی ایمیل
         pattern = r'^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$'    #بررسی میکند ایمیل مطابق الگو باشد
-        return re.fullmatch(pattern, email)     #اگر ایمیل با شرایط مطابقت کرد شی مچ برمیگردد در غیر این صورت نان
+        return re.match(pattern, email)     #اگر ایمیل با شرایط مطابقت کرد شی مچ برمیگردد در غیر این صورت نان
 
     def acceptable_Password(self, password) :      #متد اعتبار سنجی پسورد
         pattern = r'^(?=.*[a-zA-Z])(?=.*\d)(?=.*[@&]).{8,10}$'       #بررسی میکند پسورد مطابق الگو باشد
