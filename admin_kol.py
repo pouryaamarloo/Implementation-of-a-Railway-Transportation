@@ -104,7 +104,7 @@ class ManagementPanel: #Management panel class
         print("Error: Employee not found!")#If the username is not found, a message will be displayed.
 
     def list_employees(self):#Method to display all employees
-            if not self.employees:# if list empty
+        if not self.employees:# if list empty
             print("No employees found.")# The message will be displayed
         for emp in self.employees:#Otherwise, each employee's information will be printed.
             print(f"Username: {emp['username']}, Name: {emp['name']} {emp['family']}, Email: {emp['email']}")
