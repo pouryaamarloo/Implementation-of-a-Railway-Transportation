@@ -1,11 +1,21 @@
 from bank import API
-from train_employe import *
+from test import exp_month
+from train_employe import Employee
 import pyinputplus as pyip
 import datetime as dt
 
 class Normal_User_Panel(Employee):
     def __init__(self):
         super().__init__()
+        self.username ="pouryaam"
+        self.User =[{
+            "Name" : "pourya",
+            "Email" : "pourya@gmail.com",
+            "Username" : "pouryaam",
+            "Password" : "123456#@",
+            "card"    : {},
+        }
+        ]
 
         self.detail = [
             {   "train_name" : "306",
@@ -65,7 +75,7 @@ class Buy_Ticket(Normal_User_Panel):
                         print(
                             "The train capacity is less than what you selected\nif you want to back last panel enter 0")
                         Count = pyip.inputInt(
-                            prompt="Please enter the number of tickets you want: ",
+                            prompt="Please enter the number of tickets you want: \n if you want to back last panel enter 0 .",
                             min=0,
                             max=i['amount']
                         )
@@ -97,22 +107,43 @@ class Buy_Ticket(Normal_User_Panel):
 
                 if price <= self.wallet:
                     self.wallet -= price
-                    print("Purchase completed successfully.")
+                    print(f"Purchase completed successfully.your balance is {self.wallet}")
                     train_amount = train_amount - Count
                     for i in self.detail:
                         if choice == i['id']:
                             i.update({"amount":train_amount})
+
                             file = f""
                             self.show_data()
                             return
                 else:
-                    print("your balance is less than your ticket price.")
+                    while True:
+                        print("your balance is less than your ticket price. ")
+                        again = pyip.inputYesNo(prompt=" Do you want to increase your wallet balance? (y/n) ")
+                        if again == "n":
+                            self.show_data()
+                            break
+                        else :
+                            print("please enter the amount of money you want to deposit into your wallet.")
+                            num = check_int()
+                            amount =user.deposit(num)
+                            self.wallet += amount
+                            print(f"Your wallet balance is {self.wallet}")
+                            if price <= self.wallet:
+                                print("Purchase completed successfully")
+                                self.show_data()
+                                return
+                            else :
+                                continue
+
+
+
                     return
 
         else:
             self.wallet -= price
             print("Purchase completed successfully.")
-            train_amount = train_amount - Count
+            train_amount -= train_amount - Count
             for i in self.detail:
                 if choice == i['id']:
                     i.update({"amount": train_amount})
@@ -158,11 +189,23 @@ class Transaction(Buy_Ticket):
                     print("Please enter a positive number.")
                 else:
                     return a
+        for i in self.User :
+            if  i["card"]  :
+                card = i["card"]["card"]
+                exp_month = i["card"]["exp_month"]
+                exp_year = i["card"]["exp_year"]
+                password = i["card"]["password"]
+                cvv2 = i["card"]["cvv2"]
+                Valid = API()
+                flag = Valid.pay(card, exp_month, exp_year, password, cvv2, amount)
+                if flag :
+                    return amount
+
 
 
         card=input("Enter the card number: ")
         print("exp month :")
-        exp_moth =check_int()
+        exp_month =check_int()
         print("exp year :")
         exp_year = check_int()
         print("password :")
@@ -170,8 +213,16 @@ class Transaction(Buy_Ticket):
         print("cvv2 :")
         cvv2 = check_int()
         Valid = API ()
-        flag = Valid.pay(card,exp_moth,exp_year,password,cvv2,amount)
-        if flag:
+        flag = Valid.pay(card,exp_month,exp_year,password,cvv2,amount)
+        if flag :
+
+            for j in self.User:
+                if j["Username"] == self.username:
+                    j["card"].update({"card":card,"exp_month":exp_month,"exp_year":exp_year,"password":password ,"cvv2":cvv2})
+            print(self.User)
+
+
+
 
             return amount
 
