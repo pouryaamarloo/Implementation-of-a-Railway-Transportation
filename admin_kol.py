@@ -70,17 +70,15 @@ class ManagementPanel:#کلاس پنل مدیریت
             #بعد از وارد کردن تمام اطلاعات درست یک دیکشنری ساخته میشود که اطلاعات کارمند را نگه میدارد
             self.employees.append(emp)#دیکشنری ساخته شده به لیست کارمندان اضافه میشود
             print(f"Employee {username} added successfully.")#پیام اضافه شدن موفقیت آمیز کارمند نشان داده میشود
-            while True:
-                try:
-                    repeat=input("do you want add another user? \n choose 1:yes \n if choose 2:no")
-                    if repeat == 1:
-                        break    
-                    elif repeat ==2:
-                        return
-                    else:
-                        print("Choose 1 or 2")
-                except ValueError:
-                    print("Invalid input! Enter a number.")
+                
+            repeat=input("Do you want to add another user? \n1: Yes \n2: No\n").strip()
+            if repeat == "1":
+                continue    
+            elif repeat == "2":
+                return
+            else:
+                print("Invalid choice, plaese Choose 1 or 2")
+                
 
 
 
