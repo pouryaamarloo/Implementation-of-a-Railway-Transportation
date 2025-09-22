@@ -20,8 +20,7 @@ class ManagementPanel: #Management panel class
         
             while True:#Password loop
                 password = input("Enter password: ").strip()#The password is entered and the extra space is removed.
-                if not re.match(r'^[A-Za-z0-9@&]{6,16}$', password
-# Using regex, it is checked that the password contains English letters, numbers, @ or & and is between 6 and 16 characters long.
+                if not re.match(r'^[A-Za-z0-9@&]{6,16}$', password):# Using regex, it is checked that the password contains English letters, numbers, @ or & and is between 6 and 16 characters long.
                     print("Password must include letters, numbers, @ or & and length 6-16")# In case of error, the message is printed.
                     continue_choice = self.retry_or_return()
                     if continue_choice == "return":
@@ -38,8 +37,8 @@ class ManagementPanel: #Management panel class
                 if any(emp["email"] == email for emp in self.employees):# It is checked whether the email has a password or not.
                     print("Error: Email already exists")
                     continue
-                if not re.match(r'^[a-zA-Z0-9_.+-]+@(gmail|yahoo)\.com$', email):# Using email, it checks whether the email is one of the two opposite formats.gmail/yahoo
-                    print("Email must be in correct format (gmail/yahoo)")#If there is an error, an error message will be printed.
+                if not re.match(r'^[a-zA-Z0-9_.%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$', email):# Using email, it checks whether the email is one of the two opposite formats.gmail/yahoo
+                    print("Email must be in correct format")#If there is an error, an error message will be printed.
                     continue_choice = self.retry_or_return()
                     if continue_choice == "return":# again ask return icon 
                         return
