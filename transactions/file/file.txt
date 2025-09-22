@@ -1,0 +1,9 @@
+
+                ==============================
+                 Train Name : 306
+                 Train ID   : 3
+                 Line Name  : mashhad_tehran
+                 Price      : 100
+                 Capacity   : 200
+                ==============================
+                

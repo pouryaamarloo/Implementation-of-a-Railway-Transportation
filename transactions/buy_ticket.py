@@ -33,7 +33,8 @@ class Normal_User_Panel(Employee):
 class Buy_Ticket(Normal_User_Panel):
     def __init__(self):
         super().__init__()
-        self.wallet = 500
+        self.wallet = 0
+        self.tickets=[]
 
     def buy_ticket(self):
 
@@ -52,7 +53,9 @@ class Buy_Ticket(Normal_User_Panel):
             self.show_data()
             return
         for i in self.detail:
-                print(f"""
+
+            with open("file/file.txt","w+") as f:
+                f.write(f"""
                 ==============================
                  Train Name : {i['train_name']}
                  Train ID   : {i['id']}
@@ -61,6 +64,10 @@ class Buy_Ticket(Normal_User_Panel):
                  Capacity   : {i['amount']}
                 ==============================
                 """)
+                f.seek(0)
+                print(f.read())
+
+
         while True:
             print("please enter train id ")
             choice = check_int()
@@ -91,31 +98,32 @@ class Buy_Ticket(Normal_User_Panel):
             else:
                 price = price * Count
                 break
-        if price > self.wallet:
-            print(f"You don't have enough money. your balance is {self.wallet}")
-            again = pyip.inputYesNo(prompt=" Do you want to increase your wallet balance? (y/n) ")
-            if again == "n":
-                self.show_data()
-                return
-            else:
-                user = Transaction()
-                print("Please enter the amount of money you want to deposit into your wallet.")
-                num = check_int()
-                amount =user.deposit(num)
-                self.wallet += amount
-                print(f"Your wallet balance is {self.wallet}")
+        while True :
+            if price > self.wallet:
+                print(f"You don't have enough money. your balance is {self.wallet}")
+                again = pyip.inputYesNo(prompt=" Do you want to increase your wallet balance? (y/n) ")
+                if again == "n":
+                    self.show_data()
+                    return
+                else:
+                    user = Transaction()
+                    print("Please enter the amount of money you want to deposit into your wallet.")
+                    num = check_int()
+                    amount =user.deposit(num)
+                    self.wallet += amount
+                    print(f"Your wallet balance is {self.wallet}")
 
-                if price <= self.wallet:
-                    self.wallet -= price
-                    print(f"Purchase completed successfully.your balance is {self.wallet}")
-                    train_amount = train_amount - Count
-                    for i in self.detail:
-                        if choice == i['id']:
-                            i.update({"amount":train_amount})
-
-                            file = f""
-                            self.show_data()
-                            return
+                    if price <= self.wallet:
+                        self.wallet -= price
+                        print(f"Purchase completed successfully.your balance is {self.wallet}")
+                        train_amount = train_amount - Count
+                        for i in self.detail:
+                            if choice == i['id']:
+                                i.update({"amount":train_amount})
+                                dict_ =dict(train_name=i['train_name'],id=i['id'],line_name=i['line_name'],price=i['price'],Count=Count)
+                                create_file(dict_)
+                                self.show_data()
+                                return
                 else:
                     while True:
                         print("your balance is less than your ticket price. ")
@@ -131,14 +139,19 @@ class Buy_Ticket(Normal_User_Panel):
                             print(f"Your wallet balance is {self.wallet}")
                             if price <= self.wallet:
                                 print("Purchase completed successfully")
-                                self.show_data()
+                                for i in self.detail:
+                                    if choice == i['id']:
+                                        i.update({"amount": train_amount})
+                                        dict_ = dict(train_name=i['train_name'], id=i['id'], line_name=i['line_name'],
+                                                     price=i['price'], Count=Count)
+                                        create_file(dict_)
+                                        self.show_data()
                                 return
                             else :
                                 continue
 
 
 
-                    return
 
         else:
             self.wallet -= price
