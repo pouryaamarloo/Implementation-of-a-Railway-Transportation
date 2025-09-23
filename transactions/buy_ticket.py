@@ -13,7 +13,6 @@ class Normal_User_Panel(Employee):
             "email" : "pourya@gmail.com",
             "username" : "pouryaam",
             "password" : "123456#@",
-            "card"    : {},
         }
         ]
 
@@ -256,7 +255,7 @@ class Transaction(Buy_Ticket):
                 else:
                     return a
         for i in self.User :
-            if  i["card"]  :
+            if  "card" in i   :
                 card = i["card"]["card"]
                 exp_month = i["card"]["exp_month"]
                 exp_year = i["card"]["exp_year"]
@@ -284,8 +283,13 @@ class Transaction(Buy_Ticket):
 
             for j in self.User:
                 if j["username"] == self.username:
-                    j["card"].update({"card":card,"exp_month":exp_month,"exp_year":exp_year,"password":password ,"cvv2":cvv2})
-            print(self.User)
+                    j["card"] = {
+                        "card": card,
+                        "exp_month": exp_month,
+                        "exp_year": exp_year,
+                        "password": password,
+                        "cvv2": cvv2
+                    }
 
             return amount
 
