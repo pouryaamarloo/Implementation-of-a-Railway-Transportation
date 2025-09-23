@@ -34,20 +34,20 @@ def start_panel():
                 else:
                     print("Error wrong password")  # در صورت اشتباه بودن پسورد پیام مقابل نمایش داده شود
                     continue
-        if user_input == "2":
-            while True:
-                user_name = input()
-                password = input()
-                if not admin.employess():
-                    print("we don't have enough employes!\n you should add employess first")
-                    start_panel()
-                    return
+            if user_input == "2":
+                while True:
+                    user_name = input("please enter your user name: ")
+                    password = input("please enter your password: ")
+                    if not admin.employees:
+                        print("we don't have enough employes!\n you should add employess first")
+                        start_panel()
+                        return
 
-                for i in admin.all_information:
-                    if user_name == i["username"]:
-                        if password == i["password"]:
-                            employee = Employee()
-                            employee.panel_employee()
+                    for i in admin.all_information:
+                        if user_name == i["username"]:
+                            if password == i["password"]:
+                                employee = Employee()
+                                employee.panel_employee()
 
 
 
@@ -55,7 +55,7 @@ def start_panel():
                         print("Error wrong user name and password")
                         continue
                 break
-        if user_input == "3":
-            pass
+            if user_input == "3":
+                pass
 
 start_panel()

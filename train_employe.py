@@ -21,6 +21,7 @@ class Employee():
         self.price = 0
         self.amount = 0
         self.detail = []
+        self.list_id=[]
         self.id_= 300
 
     def add_line(self):
@@ -80,8 +81,9 @@ class Employee():
                 #total_distance = 0
                 print("please enter distacne between 2 stations ")
                 dist=check_int()
-
-                dict_ =dict(line_name=self.line_name, start=self.start, end=self.end, total=self.total , Count=self.Count,distance=dist)
+                print("please enter distance ")
+                self.total = check_int()
+                dict_ =dict(line_name=self.line_name, start=self.start, end=self.end, total=self.total , Count=self.Count,station=dist,list_station=list_lines)
                 self.line_details.append(dict_)
                 print(f"line  '{self.line_name}' Successfully registered.")
 
@@ -110,11 +112,13 @@ class Employee():
                 for i in self.line_details:
                     if i["line_name"] == self.line_name:
                         f= f"""
-                            line_name : {i["line_name"]}
-                            start     : {i["start"]}
-                            end       : {i["end"]}
-                            total     : {i["total"]}
-                            Count     : {i["Count"]}
+line_name : {i["line_name"]}
+start     : {i["start"]}
+end       : {i["end"]}
+total     : {i["total"]}
+Count     : {i["Count"]}
+station     : {i["station"]}
+list_station  : {i["list_station"]}
                             """
                         print(f)
                 print("\nWhich feature do you want to edit?")
@@ -131,72 +135,65 @@ class Employee():
 
 
                 elif feature_choice == "2":
-                    new_end = input("نام ایستگاه مقصد جدید: ")
+                    new_end = input(" New origin station name : ")
 
                     for i in self.line_details:
                         if i["line_name"] == self.line_name:
                             i.update({"end":new_end})
                 elif feature_choice == "3":
                     try:
-                        self.Count = int(input("تعداد ایستگاه‌ها (به جز مبدأ و مقصد): "))
+                        self.Count = int(input("Number of stations (excluding origin and destination):"))
                     except ValueError:
-                        print("لطفاً یک عدد صحیح وارد کنید.")
+                        print("Please enter a valid number.")
                         continue
 
                     for i in self.line_details:
                         if i["line_name"] == self.line_name:
-                            i.update({"Count":self.Count})
+                            i.update({"Count": self.Count})
 
                 else:
-                    print("گزینه نامعتبر!")
+                    print("Invalid option")
             elif choice == "2":
-                    print("بازگشت به منوی کارمند.")
+                    print("Return to the employee menu.")
                     break
             else:
-                    print("گزینه نامعتبر! لطفاً دوباره تلاش کنید.")
+                    print("Invalid option! Please try again.")
 
 
     def delete_line(self):
          while True:
-            print("\n--- حذف خط ---")
-            print("1. حذف خط")
-            print("2. بازگشت به منوی کارمند")
-            choice = input("انتخاب کنید: ")
+            print("\n----  Delet line  ---")
+            print("1. Delet line")
+            print("2. Return to emploee menu")
+            choice = input (" Choose pls : ")
 
             if choice == "1":
-                line_name = input("نام خطی که می‌خواهید حذف کنید: ")
+                line_name = input("The name of the line you want to delete:")
 
                 if line_name not in self.lines:
-                    print("خطی با این نام وجود ندارد! لطفاً نام صحیح وارد کنید.")
+                    print("There is no line with this name! Please enter the correct name.")
                     continue
 
                 for i in self.line_details:
                     if i["line_name"] == self.line_name:
-                        del self.line_details[i]
+                         self.line_details.remove(i)
 
             elif choice == "2":
-                print("بازگشت به منوی کارمند.")
+                print("Return to emploee menu")
                 break
             else:
-                print("گزینه نامعتبر! لطفاً دوباره تلاش کنید.")
-
+                print("Invalid option! Please try again.")
 
     def list_line(self):
          while True:
-            print("\n--- حذف خط ---")
-            print("1. حذف خط")
-            print("2. بازگشت به منوی کارمند")
-            choice = input("انتخاب کنید: ")
+            print("\n--  List Line ---")
+            print("1.   Show list line ")
+            print ("2. Return to  ")
+            choice = input("Your choose : ")
 
             if choice == "1":
-                line_name = input("نام خطی که می‌خواهید حذف کنید: ")
-
-                if line_name not in self.lines:
-                    print("خطی با این نام وجود ندارد! لطفاً نام صحیح وارد کنید.")
-                    continue
 
                 for i in self.line_details:
-                    if i["line_name"] == self.line_name:
                         a = f"""
                             line_name : {i["line_name"]}
                             start     : {i["start"]}
@@ -206,11 +203,10 @@ class Employee():
                         """
                         print(a)
             elif choice == "2":
-                print("بازگشت به منوی کارمند.")
+                print("returen to employee menu")
                 break
             else:
-                print("گزینه نامعتبر! لطفاً دوباره تلاش کنید.")
-
+                print("Invalid option! Please try again.")
 
     def add_train(self):
         def check_Str():#حساب کردن ورودی های رشته ای
@@ -227,54 +223,58 @@ class Employee():
         def check_int():#حساب کردن ورودی های عددی
             while True:
                 try :
-                    print("برای خروج عدد صفر را وارد کنید :")
+                    print("if you want to back last panell enter 0")
                     adad = int(input())
                     if adad < 0 :
-                        print("عدد باید مثبت باشه ")
+                        print("please enter a possitive number ")
                         continue
                 except :
-                    print("لطفا عدد وارد کنید :")
+                    print("please enter a number")
                     continue
                 if type(adad) == int :
                     return adad
-        print("لطفا نام قطار را وارد کنید : ")
+        print("please enter train name ")
         self.train_name = check_Str()
         if self.train_name == "exit":
             self.train_name = ""
             self.panel_employee()
-        print("لطفا خط حرکت را وارد کنید :")
+        print("please enter line name ")
+        for i in self.detail:
+            print(i["line_name"])
         while True:
             self.line_name = check_Str()
-            if self.line_name not in self.list_lines :
-                print("خط مورد نظر وجود ندارد :")
+            if self.line_name not in self.lines :
+                print("line_name does not exist")
             else :
                 break
-        print("سرعت متوسط را وارد کنید :")
+        print("please enter speed")
         self.speed = check_int()
         if self.speed == 0 :
             self.panel_employee()
-        print("میزان توقف در هر ایستکاه را وارد کنید :")
+        print("please enter wait")
         self.wait = check_int()
         if self.wait == 0 :
             self.panel_employee()
-        print("لطفا کیفیت قطار را بین 1 تا 5 ستاره انتخاب کنید\nبرای خروج گزینه 0 را وارد کنید :")
+        print("please enter rate \n if you want to back last panell enter 0")
         self.rate = pyip.inputInt(min= 0 , max =5)
         if self.rate == 0 :
             self.panel_employee()
-        print("هزینه قطار را وارد کنید :")
+        print("please enter cost of train")
         self.price = check_int()
         if self.price == 0 :
             self.panel_employee()
-        print("لطفا ظرفیت را وارد کنید :")
+        print("please enter amount of train")
         if self.amount == 0 :
             self.panel_employee()
         self.id_ += 1
+        self.list_id.append(self.id_)
+
 
         dict_ = dict(train_name = self.train_name,line_name = self.line_name,
                      speed = self.speed,wait = self.wait,
                      rate = self.rate,price = self.price,amount = self.amount,id = self.id_ )
         self.detail.append(dict_)
-        print("اگر باز هم میخواهید اطلاعات قطار جدید ارائه دهید گزینه یک \nاگر میخواهد به پنل کارمند بروید گزینه 0")
+        print("if you want to add new train enter 1 or back last panell enter 0")
         select_= pyip.inputInt(min= 0 , max =1)
         if select_ == 0:
             self.panel_employee()
@@ -283,40 +283,159 @@ class Employee():
             self.add_train()
             return
     def update_train(self):
-        pass
+
+        def check_int():
+            while True :
+                try:
+                    num = int(input())
+                    if num < 0 :
+                        print("Please enter a possitive number")
+                        continue
+                except:
+                    print("please enter a number")
+                    continue
+                return num
+        while True:
+            print("\n--- Train Editing---")
+            print("1. train edite")
+            print("2. Return to the employee menu")
+            choice = input("Choose please : ")
+
+            if choice == "1":
+                self.id_ = input("please enter train id ")
+
+                if self.line_name not in self.list_id:
+                    print("There is no line with this name. Please enter a valid name.")
+                    continue
+
+                for i in self.detail:
+                    if i["id"] == self.id_:
+                        f = f"""
+        train_name    : {i["train_name"]}
+        line_name     : {i["line_name"]}
+        speed         : {i["speed"]}
+        wait          : {i["wait"]}
+        rate          : {i["rate"]}
+        price         : {i["price"]}
+        amount        : {i["amount"]}
+        list_station  : {i["list_station"]}
+                                    """
+                        print(f)
+                print("\nWhich feature do you want to edit?")
+                print("1. train_name")
+                print("2. line_name ")
+                print("3. speed")
+                print("4. wait")
+                print("5. rate ")
+                print("6. price")
+                print("7. amount")
+
+                while True:
+
+                    feature_choice = input(" Your choose :")
+
+                    if feature_choice == "1":
+                        new_start = input("please enter train name ")
+                        for i in self.detail:
+                            if i["id"]==self.id_ :
+                                i.update({"train_name": new_start})
+                                break
+                    if feature_choice == "2":
+                        new_start = input("please enter line name ")
+                        for i in self.line_details:
+                            if i["id"] == self.id_ :
+                                i.update({"line_name": new_start})
+                                break
+
+                    if feature_choice == "3":
+                        print("please enter speed ")
+                        new_speed = check_int()
+                        for i in self.line_details:
+                            if i["id"] == self.id_:
+                                i.update({"speed": new_speed})
+                                break
+
+                    if feature_choice == "4":
+                        print("please enter wait ")
+                        new_start = check_int()
+                        for i in self.line_details:
+                            if i["id"] == self.id_:
+                                i.update({"wait": new_start})
+                                break
+
+                    if feature_choice == "5":
+                        print("please enter rate ")
+                        new_start = check_int()
+                        for i in self.line_details:
+                            if i["id"] == self.id_:
+                                i.update({"rate": new_start})
+                                break
+                    if feature_choice == "6":
+                        print("please enter price ")
+                        new_start = check_int()
+                        for i in self.line_details:
+                            if i["id"] == self.id_:
+                                i.update({"price": new_start})
+                                break
+
+
+                    if feature_choice == "7":
+                        print("please enter amount ")
+                        new_start = check_int()
+                        for i in self.line_details:
+                            if i["id"] == self.id_:
+                                i.update({"amount": new_start})
+                                break
+                    else :
+                        print("please enter correct Value ")
+
+
+
+
 
     def delete_train(self):
-        list_ = []
         while True:
             try:
-                id_ = int(input("لطفا ایدی قطار مورد نظر را وارد کنید\nاگر قصد بازگشت دارید عدد 0 را وارد کنید"))
+                print("Please enter the ID of the desired train.")
+                print("If you want to go back, enter 0.")
+                id_ = int(input())
             except :
-                print("آیدی حتما باید عدد باشد دوست عزیز !!!")
+                print("please enter correct Value ")
                 continue
-            for i in self.detail:
-                list_.append(i["id"])
-            if id_ not in  list_ :
-                print("آیدی که ووارد کردید وجود خارجی ندارد لطفا دوباره تلاش کنید")
-            else :
+            if id_ == 0 :
                 break
-        for i in self.detail :
-            if i["id"] == id_ :
-                self.detail.remove(i)
-                return
+            for i in self.detail:
+                if i["id"] == id_:
+                    self.detail.remove(i)
+        return
+
+
 
 
     def list_train(self):
-        print(self.detail)
+        for i in self.detail:
+            if i["line_name"] == self.line_name:
+                f = f"""
+        train_name: {i["train_name"]}        
+        line_name : {i["line_name"]}
+        speed     : {i["speed"]}
+        wait      : {i["wait"]}
+        rate      : {i["rate"]}
+        price     : {i["price"]}
+        amount    : {i["amount"]}
+        id        : {i["amount"]}
+                                    """
+                print(f)
         while True:
             try:
-                a = int(input("اگر قصد خروج دارید عدد صفر را وارد کنید "))
+                a = int(input("if you want to back last panell enter 0"))
             except :
-                print("لطفا فقط عدد وارد کنید")
+                print("please enter a possitive number ")
             if a == 0:
                 self.panel_employee()
                 break
             else:
-                print("لطفا مقدار صحیح را وارد کنید")
+                print("please enter number ")
 
 
     def panel_employee(self):
@@ -363,7 +482,7 @@ class Employee():
                 print("this number is out of range")
                 print("try again")
 
-            
+
 
 
 
