@@ -437,7 +437,6 @@ list_station  : {i["list_station"]}
             except :
                 print("please enter a possitive number ")
             if a == 0:
-                self.panel_employee()
                 break
             else:
                 print("please enter number ")

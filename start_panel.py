@@ -71,7 +71,8 @@ def start_panel():
 
         elif user_input == "4":
             print("Goodbye!")
-            break
+            exit()
+
 
 
 
