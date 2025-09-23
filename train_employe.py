@@ -103,7 +103,7 @@ class Employee():
             choice = input("Choose please : ")
 
             if choice == "1":
-                self.line_name = input("نام خط مورد نظر برای ویرایش: ")
+                self.line_name = input("please enter line name: ")
 
                 if self.line_name not in self.lines:
                     print("There is no line with this name. Please enter a valid name.")
@@ -211,13 +211,13 @@ list_station  : {i["list_station"]}
     def add_train(self):
         def check_Str():#حساب کردن ورودی های رشته ای
             while True:
-                print("برای خروج exit را تایپ کنید :")
+                print("if you want back to last panel enter exit")
                 name = input()
                 if name == "":
-                    print("لطفا اطلاعات وارد کنید خالی نگذارید ")
+                    print("please enter correct Value ")
                     continue
                 if name.isdigit():
-                    print("لطفا اطلاعات درست وارد کنید :")
+                    print("please enter correct Value ")
                 else :
                     return name
         def check_int():#حساب کردن ورودی های عددی
