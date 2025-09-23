@@ -15,6 +15,7 @@ class Normal_User_Panel(Employee):
             "password" : "123456#@",
         }
         ]
+        
 
         self.detail = [
             {   "train_name" : "306",
