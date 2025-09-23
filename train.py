@@ -39,17 +39,17 @@ class Employee():
 
 
         while True:
-            print("\n--- افزودن خط جدید ---")
-            print("1. تعریف خط جدید")
-            print("2. بازگشت به منوی کارمند")
-            choice = input("انتخاب کنید: ")
+            print("\n--- Add a new line---")
+            print("1. define new line")
+            print("2.Return to the employee menu"")
+            choice = input(" choose: ")
 
 
             if choice == "1":
-                self.line_name = input("نام خط جدید رو وارد کنید: ")
+                self.line_name = input("Enter the name of the new line:")
 
                 if self.line_name in self.lines:
-                    print("خطی دیگر با این نام وجود دارد. لطفا نام دیگری وارد کنید.")
+                    print("There is another line with this name. Please enter another name.")
                     continue
                 else:
                     self.lines.append(self.line_name)
@@ -61,7 +61,7 @@ class Employee():
                 print("please enter Counter of station")
                 self.Count = check_int(self.end)
                 for i in range(self.Count):
-                    station_name = input(f"نام ایستگاه : ")
+                    station_name = input(f"station name : ")
                     self.list_lines.append(station_name)
 
 
@@ -69,41 +69,41 @@ class Employee():
                     for i in range(len(self.list_lines) - 1):
                         while True:
                             try:
-                                dist = float(input(f"فاصله بین ایستگاه '{self.list_lines[i]}' و '{self.list_lines[i+1]}' (کیلومتر): "))
+                                dist = float(input(f" distatnce between count '{self.list_lines[i]}' و '{self.list_lines[i+1]}' (kiliomatier): "))
                                 if dist < 0:
-                                    print("فاصله نمی‌تواند منفی باشد. دوباره وارد کنید.")
+                                    print("The distance cannot be negative. Please enter again.")
                                     continue
                                 self.total += dist
                                 break
                             except ValueError:
-                                print("لطفا عدد صحیح یا اعشاری وارد کنید.")
+                                print("Please enter an integer or decimal number.")
 
-                    print(f"مسافت کل طی شده: {self.total} کیلومتر")
+                    print(f"Soft total passed: {self.total} kilometer ")
 
                 dict_ =dict(line_name=self.line_name, start=self.start, end=self.end, total=self.total , Count=self.Count)
                 self.line_details.append(dict_)
-                print(f"خط '{self.line_name}' با موفقیت ثبت شد.")
+                print(f"line  '{self.line_name}' Successfully registered.")
 
             elif choice == "2":
-                print("بازگشت به منوی کارمند.")
+                print("Return to the employee menu.")
                 break
             else:
-                print("گزینه نامعتبر! لطفاً دوباره تلاش کنید.")
+                print("Invalid option! Please try again.")
 
 
 
     def update_line(self):
          while True:
-            print("\n--- ویرایش خط ---")
-            print("1. ویرایش خط")
-            print("2. بازگشت به منوی کارمند")
-            choice = input("انتخاب کنید: ")
+            print("\n--- Line editing---")
+            print("1. line edite")
+            print("2. Return to the employee menu")
+            choice = input( " choose pls " )
 
             if choice == "1":
-                self.line_name = input("نام خط مورد نظر برای ویرایش: ")
+                self.line_name = input("Name of the line to edit:")
 
                 if self.line_name not in self.lines:
-                    print("خطی با این نام موجود نیست. لطفاً نام صحیح وارد کنید.")
+                    print("There is no line with this name. Please enter a valid name.")
                     continue
 
                 for i in self.line_details:
@@ -116,30 +116,30 @@ class Employee():
                             Count     : {i["Count"]}
                             """
                         print(f)
-                print("\nکدام ویژگی را می‌خواهید ویرایش کنید؟")
-                print("1. مبدا")
-                print("2. مقصد")
-                print("3. ایستگاه‌ها")
-                feature_choice = input("انتخاب شما: ")
+                print("\nWhich feature do you want to edit?")
+                print("1. stArt")
+                print("2. end ")
+                print("3. stations")
+                feature_choice = input (" your choose :")
 
                 if feature_choice == "1":
-                    new_start = input("نام ایستگاه مبدأ جدید: ")
+                    new_start = input("New origin station name:")
                     for i in self.line_details:
                         if i["line_name"] == self.line_name:
                             i.update({"start":new_start})
 
 
                 elif feature_choice == "2":
-                    new_end = input("نام ایستگاه مقصد جدید: ")
+                    new_end = input("New origin station name:")
 
                     for i in self.line_details:
                         if i["line_name"] == self.line_name:
                             i.update({"end":new_end})
                 elif feature_choice == "3":
                     try:
-                        self.Count = int(input("تعداد ایستگاه‌ها (به جز مبدأ و مقصد): "))
+                        self.Count = int(input("Number of stations (excluding origin and destination):"))
                     except ValueError:
-                        print("لطفاً یک عدد صحیح وارد کنید.")
+                        print("Please enter a valid number.")
                         continue
 
                     for i in self.line_details:
@@ -147,26 +147,26 @@ class Employee():
                             i.update({"Count":self.Count})
 
                 else:
-                    print("گزینه نامعتبر!")
+                    print("Invalid option")
             elif choice == "2":
-                    print("بازگشت به منوی کارمند.")
+                    print("Return to the employee menu.")
                     break
             else:
-                    print("گزینه نامعتبر! لطفاً دوباره تلاش کنید.")
+                    print("Invalid option! Please try again.")
 
 
     def delete_line(self):
          while True:
-            print("\n--- حذف خط ---")
-            print("1. حذف خط")
-            print("2. بازگشت به منوی کارمند")
-            choice = input("انتخاب کنید: ")
+            print("\n----  delet line  ---")
+            print("1. delet line")
+            print("2. return to emploee menu")
+            choice = input (" choose pls : ")
 
             if choice == "1":
-                line_name = input("نام خطی که می‌خواهید حذف کنید: ")
+                line_name = input("The name of the line you want to delete:")
 
                 if line_name not in self.lines:
-                    print("خطی با این نام وجود ندارد! لطفاً نام صحیح وارد کنید.")
+                    print("There is no line with this name! Please enter the correct name.")
                     continue
 
                 for i in self.line_details:
@@ -174,24 +174,23 @@ class Employee():
                         del self.line_details[i]
 
             elif choice == "2":
-                print("بازگشت به منوی کارمند.")
+                print("return to emploee menu")
                 break
             else:
-                print("گزینه نامعتبر! لطفاً دوباره تلاش کنید.")
-
+                print("Invalid option! Please try again.")
 
     def list_line(self):
          while True:
-            print("\n--- حذف خط ---")
-            print("1. حذف خط")
-            print("2. بازگشت به منوی کارمند")
-            choice = input("انتخاب کنید: ")
+            print("\n--  delet line ---")
+            print("1.   delete line ")
+            print ("2. return to  ")
+            choice = input("your choose  ")
 
             if choice == "1":
-                line_name = input("نام خطی که می‌خواهید حذف کنید: ")
+                line_name = input("The name of the line you want to delete:")
 
                 if line_name not in self.lines:
-                    print("خطی با این نام وجود ندارد! لطفاً نام صحیح وارد کنید.")
+                    print("There is no line with this name! Please enter the correct name.")
                     continue
 
                 for i in self.line_details:
@@ -205,7 +204,7 @@ class Employee():
                         """
                         print(a)
             elif choice == "2":
-                print("بازگشت به منوی کارمند.")
+                print("returen to employee menu")
                 break
             else:
-                print("گزینه نامعتبر! لطفاً دوباره تلاش کنید.")
+                print("Invalid option! Please try again.")
