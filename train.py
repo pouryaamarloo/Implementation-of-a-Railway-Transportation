@@ -41,7 +41,7 @@ class Employee():
         while True:
             print("\n--- Add a new line---")
             print("1. define new line")
-            print("2.Return to the employee menu"")
+            print("2.Return to the employee menu")
             choice = input(" choose: ")
 
 
@@ -94,10 +94,10 @@ class Employee():
 
     def update_line(self):
          while True:
-            print("\n--- Line editing---")
+            print("\n--- Line Editing---")
             print("1. line edite")
             print("2. Return to the employee menu")
-            choice = input( " choose pls " )
+            choice = input("Choose please : ")
 
             if choice == "1":
                 self.line_name = input("Name of the line to edit:")
@@ -117,10 +117,10 @@ class Employee():
                             """
                         print(f)
                 print("\nWhich feature do you want to edit?")
-                print("1. stArt")
-                print("2. end ")
-                print("3. stations")
-                feature_choice = input (" your choose :")
+                print("1. Start")
+                print("2. End ")
+                print("3. Stations")
+                feature_choice = input (" Your choose :")
 
                 if feature_choice == "1":
                     new_start = input("New origin station name:")
@@ -157,10 +157,10 @@ class Employee():
 
     def delete_line(self):
          while True:
-            print("\n----  delet line  ---")
-            print("1. delet line")
-            print("2. return to emploee menu")
-            choice = input (" choose pls : ")
+            print("\n----  Delet line  ---")
+            print("1. Delet line")
+            print("2. Return to emploee menu")
+            choice = input (" Choose pls : ")
 
             if choice == "1":
                 line_name = input("The name of the line you want to delete:")
@@ -174,17 +174,17 @@ class Employee():
                         del self.line_details[i]
 
             elif choice == "2":
-                print("return to emploee menu")
+                print("Return to emploee menu")
                 break
             else:
                 print("Invalid option! Please try again.")
 
     def list_line(self):
          while True:
-            print("\n--  delet line ---")
-            print("1.   delete line ")
-            print ("2. return to  ")
-            choice = input("your choose  ")
+            print("\n--  Delet line ---")
+            print("1.   Delete line ")
+            print ("2. Return to  ")
+            choice = input("Your choose : ")
 
             if choice == "1":
                 line_name = input("The name of the line you want to delete:")
