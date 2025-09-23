@@ -43,18 +43,18 @@ def start_panel():
                     start_panel()
                     return
 
-                for i in admin.employess():
-                    if i["user_name"] == user_name and i["password"] == password:
-                        print(f"welcome to the Management Panel!{i['name']}")
-                        employee = Employee()
-                        employee.panel_employee()
-                        break
+                for i in admin.all_information:
+                    if user_name == i["username"]:
+                        if password == i["password"]:
+                            employee = Employee()
+                            employee.panel_employee()
+
+
 
                     else :
                         print("Error wrong user name and password")
                         continue
                 break
-            return
         if user_input == "3":
             pass
 
