@@ -182,59 +182,6 @@ class Buy_Ticket(Normal_User_Panel):
                             else :
                                 print("please enter a valid password.")
                                 continue
-                        if i[title] == "card" :
-                            print(f"""
-                            card       : {i["card"]["card"]},
-                            exp_month  : {i["card"]["exp_month"]},
-                            exp_year   : {i["card"]["exp_year"]},
-                            cvv2       : {i["card"]["cvv2"]},                           
-                            """)
-                            card = input("Which part do you want to change")
-                            card = card.lower()
-                            if card in i["card"] :
-                                while True :
-                                    try:
-                                        change =int(input("Enter the new value"))
-                                    except :
-                                        continue
-                                    if card == "card" :
-                                        if len(str(change)) != 16 or not str(card).isnumeric():
-                                            print("Please enter a valid number.")
-                                        else:
-                                            i["card"].update({"card":int(card)})
-                                            print("The changes were successful. ✅")
-                                            return
-                                    if card == "exp_month":
-                                        if not (1 <= change <= 12):
-                                            print("Please enter a valid month.")
-                                            continue
-                                        else :
-                                            i["card"].update({"exp_month":change})
-                                            print("The changes were successful. ✅")
-                                            return
-                                    if card == "exp_year":
-                                        if change < 1403 or change > 1408:
-                                            print("Please enter a valid year.")
-                                            continue
-                                        else:
-                                            i["card"].update({"exp_year":change})
-                                            print("The changes were successful. ✅")
-                                            return
-                                    if card == "cvv2":
-                                        if len(str(change)) != 3:
-                                            print("Please enter a valid CVV2.")
-                                            continue
-                                        else:
-                                            i["card"].update({"cvv2":change})
-                                            print("The changes were successful. ✅")
-                                            return
-                                    if card == "password":
-                                        if len(str(change)) != 6:
-                                            print("Please enter a valid password.")
-                                        else :
-                                            i["card"].update({"password":change})
-                                            print("The changes were successful. ✅")
-                                            return
 
                 else:
                     print(f"{title} not found.")
