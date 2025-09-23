@@ -20,7 +20,7 @@ class ManagementPanel: #Management panel class
         
             while True:#Password loop
                 password = input("Enter password: ").strip()#The password is entered and the extra space is removed.
-                if not re.match(r'^[A-Za-z0-9@&]{6,16}$', password) or not re.search(r'[A-Za-z]',password) or not re.search(r'[0-9]',password) or not re.search(r'[@|&]',password):# Using regex, it is checked that the password contains English letters, numbers, @ or & and is between 6 and 16 characters long.
+                if not re.match(r'^[A-Za-z0-9@&]{6,16}$', password) or not re.search(r'[A-Za-z]',password) or not re.search(r'[0-9]',password) or not re.search(r'[@&]',password):# Using regex, it is checked that the password contains English letters, numbers, @ or & and is between 6 and 16 characters long.
                     print("Password must include at least one letters,one numbers,one @ or & and length 6-16")# In case of error, the message is printed.
                     continue_choice = self.retry_or_return()
                     if continue_choice == "return":
