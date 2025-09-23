@@ -41,8 +41,8 @@ class Employee():
             while True :
                 STR=input()
                 if STR == "0":
-                    self.panel_employee()
-                    return
+
+                    return None
                 if STR.isdigit() :
                     continue
                 else :
@@ -67,8 +67,12 @@ class Employee():
                     self.lines.append(self.line_name)
                 print("please enter start")
                 self.start = chek_str()
+                if self.start == None:
+                    return
                 print("please enter end")
                 self.end = chek_str()
+                if self.end == None:
+                    return
 
                 print("please enter Counter of station")
                 self.Count = check_int()
@@ -236,13 +240,14 @@ list_station  : {i["list_station"]}
         print("please enter train name ")
         self.train_name = check_Str()
         if self.train_name == "exit":
-            self.train_name = ""
-            self.panel_employee()
+            return
         print("please enter line name ")
         for i in self.detail:
             print(i["line_name"])
         while True:
             self.line_name = check_Str()
+            if self.line_name == "exit":
+                return
             if self.line_name not in self.lines :
                 print("line_name does not exist")
             else :
@@ -250,23 +255,22 @@ list_station  : {i["list_station"]}
         print("please enter speed")
         self.speed = check_int()
         if self.speed == 0 :
-            self.panel_employee()
+            return
         print("please enter wait")
         self.wait = check_int()
         if self.wait == 0 :
-            self.panel_employee()
+            return
         print("please enter rate \n if you want to back last panell enter 0")
         self.rate = pyip.inputInt(min= 0 , max =5)
         if self.rate == 0 :
-            self.panel_employee()
+            return
         print("please enter cost of train")
         self.price = check_int()
         if self.price == 0 :
-            self.panel_employee()
+            return
         print("please enter amount of train")
         self.amount = check_int()
         if self.amount == 0 :
-            self.panel_employee()
             return
         self.id_ += 1
         self.list_id.append(self.id_)
@@ -279,10 +283,9 @@ list_station  : {i["list_station"]}
         print("if you want to add new train enter 1 or back last panell enter 0")
         select_= pyip.inputInt(min= 0 , max =1)
         if select_ == 0:
-            self.panel_employee()
             return
         else :
-            self.add_train()
+
             return
     def update_train(self):
 

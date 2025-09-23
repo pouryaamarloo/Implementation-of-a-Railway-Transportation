@@ -2,8 +2,8 @@
                 ==============================
                  Train Name : pourya
                  Train ID   : 301
-                 Line Name  : pourya
+                 Line Name  : kimi(:
                  Price      : 100
-                 Capacity   : 120
+                 Capacity   : 200
                 ==============================
                 
