@@ -1,13 +1,17 @@
 from admin_kol import ManagementPanel
 from train_employe import *
-
+from Normal_User_Panel import *
+from transactions import *
+from transactions.buy_ticket import Buy_Ticket
 
 def start_panel():
     '''
     Start Panel for Calling Different Panels
     such as Admin, Train Employee, and Regular User
     '''
-    state = 0
+    admin = None   # تعریف اولیه تا بعداً مشکل نده
+    employee = None
+
     while True:
         print("""
 1.Admin Panel
@@ -16,46 +20,62 @@ def start_panel():
 4.Exit
         """)
         user_input = input("please enter your choice: ")
-        while True:
-            if user_input == "1":
 
-                user_name = input("please enter your user name: ")
-                password = input("please enter your password: ")
-                if user_name == "Admin_Train":  # اگر ورودی 1 بود و یوزر نیم صحیح بود وارد پنل ادمین کل شود
-                    state = 1
-                else:
-                    print("Error wrong user name")  # در صورت اشتباه بودن یوزر نیم این پیام نمایش داده شود
-                    continue
-                if password == "Pass_Train" and state == 1:  #:اگر پسورد تعیین شده بود و یوزر نیم درست وارد شده بود
-                    print("welcome to the Management Panel!")  # نمایش پیام خوش آمد گویی
-                    admin = ManagementPanel()  # فراخوانی کلاس ادمین کل
-                    admin.panel()
+        if user_input == "1":
+            user_name = input("please enter your user name: ")
+            password = input("please enter your password: ")
+
+            if user_name == "Admin_Train" and password == "Pass_Train":
+                print("welcome to the Management Panel!")
+                admin = ManagementPanel()
+                admin.panel()
+            else:
+                print("Error: wrong username or password")
+
+        elif user_input == "2":
+            if not admin or not admin.employees:
+                print("we don't have enough employees!\n you should add employees first")
+                continue
+
+            user_name = input("please enter your user name: ")
+            password = input("please enter your password: ")
+
+            for i in admin.all_information:
+                if user_name == i["username"] and password == i["password"]:
+                    employee = Employee()
+                    employee.panel_employee()
                     break
-                else:
-                    print("Error wrong password")  # در صورت اشتباه بودن پسورد پیام مقابل نمایش داده شود
+            else:
+                print("username or password incorrect")
+
+        elif user_input == "3":
+            user = Normal_User_Panel()
+            user.menu()
+
+            user_name = None
+            for i in user.Users:
+                if i.get("username"):
+                    user_name = i["username"]
+                    break
+
+            if not user_name:
+                print("you have no user name")
+            else:
+                if not employee:
+                    print("Error: no employee available for detail")
                     continue
-            if user_input == "2":
-                while True:
-                    user_name = input("please enter your user name: ")
-                    password = input("please enter your password: ")
-                    if not admin.employees:
-                        print("we don't have enough employes!\n you should add employess first")
-                        start_panel()
-                        return
 
-                    for i in admin.all_information:
-                        if user_name == i["username"]:
-                            if password == i["password"]:
-                                employee = Employee()
-                                employee.panel_employee()
+                detail = employee.detail
+                wallet = Buy_Ticket(user.Users, user_name, detail)
+                wallet.show_data()
+
+        elif user_input == "4":
+            print("Goodbye!")
+            break
 
 
 
-                    else :
-                        print("Error wrong user name and password")
-                        continue
-                break
-            if user_input == "3":
-                pass
+
+
 
 start_panel()

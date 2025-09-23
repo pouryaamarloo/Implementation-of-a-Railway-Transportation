@@ -1,39 +1,15 @@
-from bank import API
+from transactions.bank import API
 from train_employe import Employee
 import pyinputplus as pyip
 import datetime as dt
 import re
 
-class Normal_User_Panel(Employee):
-    def __init__(self):
-        super().__init__()
-        self.username ="pouryaam"
-        self.User =[{
-            "name" : "pourya",
-            "email" : "pourya@gmail.com",
-            "username" : "pouryaam",
-            "password" : "123456#@",
-        }
-        ]
-        
 
-        self.detail = [
-            {   "train_name" : "306",
-                "line_name"  : "mashhad_tehran",
-                "speed"      : 120,
-                "wait"        : 5 ,
-                "rate"        : 5 ,
-                "price" :      100 ,
-                "amount"      : 200 ,
-                "id"          : 3
-
-            }
-        ]
-
-
-class Buy_Ticket(Normal_User_Panel):
-    def __init__(self):
-        super().__init__()
+class Buy_Ticket():
+    def __init__(self,users,username,detail):
+        self.User = users
+        self.username = username
+        self.detail = detail
         self.wallet = 0
         self.tickets=[]
 
@@ -75,7 +51,7 @@ class Buy_Ticket(Normal_User_Panel):
             now_no_micro = now.replace(microsecond=0)
             return now_no_micro
 
-        user = Transaction()
+        user = Transaction(self.User, self.username, self.detail)
 
         if not self.detail:
             print("You don't have any tickets to buy.")
@@ -83,7 +59,7 @@ class Buy_Ticket(Normal_User_Panel):
             return
         for i in self.detail:
 
-            with open("file/file.txt","w+") as f:
+            with open("file.txt","w+") as f:
                 f.write(f"""
                 ==============================
                  Train Name : {i['train_name']}
@@ -162,10 +138,19 @@ class Buy_Ticket(Normal_User_Panel):
                                     time       : {dict_['time']}
                                     
                                 """
-                                with open("file/tickets.txt","w+") as f:
+                                with open("tickets.txt","w+") as f:
                                     f.write(STR)
                                     f.seek(0)
                                     f.read()
+                                print(f"""
+                                Name       : {dict_['user_name']}
+                                Train Name : {dict_['train_name']}
+                                id         : {dict_['id']}
+                                line_name  : {dict_['line_name']}
+                                price      : {dict_['price']}
+                                count      : {dict_['Count']}
+                                time       : {dict_['time']}
+                                """)
 
                                 self.show_data()
                                 return
@@ -238,8 +223,8 @@ class Buy_Ticket(Normal_User_Panel):
 
 
 class Transaction(Buy_Ticket):
-    def __init__(self):
-        super().__init__()
+    def __init__(self,users, username, detail):
+        super().__init__(users, username, detail)
 
 
     def deposit(self, amount):
@@ -301,5 +286,4 @@ def create_file(list_):
         with open(f"file/{i['username']}") as f :
             f.write(f"")
 
-pir = Buy_Ticket()
-pir.show_data()
+

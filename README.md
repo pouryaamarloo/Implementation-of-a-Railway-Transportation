@@ -1,4 +1,5 @@
 # Implementation-of-a-Railway-Transportation
+<<<<<<< HEAD
 
 A Python-based Train Management System that allows different user roles (Admin, Train Employee, Passenger) to manage and interact with train schedules, lines, and tickets.
 
@@ -125,3 +126,5 @@ Ticket Purchase Panel Features:
 ## Exit (Option 4)
 
 Exits the program with a farewell message.
+=======
+>>>>>>> 1c92b85 (finally)

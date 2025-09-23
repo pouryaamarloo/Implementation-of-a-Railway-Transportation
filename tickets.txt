@@ -1,0 +1,10 @@
+
+                                    Name       : kimi
+                                    Train Name : pourya
+                                    id         : 301
+                                    line_name  : pourya
+                                    price      : 100
+                                    count      : 20
+                                    time       : 2025-09-23 23:13:01
+                                    
+                                
