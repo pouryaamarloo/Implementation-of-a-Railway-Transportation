@@ -1,5 +1,4 @@
 # Implementation-of-a-Railway-Transportation
-<<<<<<< HEAD
 
 A Python-based Train Management System that allows different user roles (Admin, Train Employee, Passenger) to manage and interact with train schedules, lines, and tickets.
 
