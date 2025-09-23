@@ -37,6 +37,24 @@ class Buy_Ticket(Normal_User_Panel):
         self.wallet = 0
         self.tickets=[]
 
+    def show_data(self):
+
+        while True:
+            print("1.buy ticket")
+            print("2.edit detail")
+            print("3.exit")
+            result = input()
+            if result == "1":
+                self.buy_ticket()
+                return
+            if result == "2":
+                self.edit_detail()
+                return
+            if result == "3":
+                return
+            else :
+                print("Invalid input")
+
     def buy_ticket(self):
 
 
@@ -46,6 +64,9 @@ class Buy_Ticket(Normal_User_Panel):
                     choice = int(input(""))
                 except ValueError:
                     print("Please enter a number.")
+                    continue
+                if choice < 0 :
+                    print("Please enter a positive number.")
                     continue
                 if choice:
                     return choice
@@ -164,28 +185,33 @@ class Buy_Ticket(Normal_User_Panel):
                     Password : {i['password']},                    """)
         def change_detail(title): # edit information
             for i in self.User:
-                if i[title] :
+                if title in i :
                     while True :
                         a = input("Apply the changes.")
-                        if i[title] == "email":
+                        if title == "email":
                             if re.match(r'^[a-zA-Z0-9_.%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$', a):
                                 i.update({"email":a})
                                 return
                             else:
                                 print("Please enter a valid email address.")
                                 continue
-                        if i[title] == "password":
-                            if re.match(r'^(?=.*[A-Za-z])(?=.*\d)(?=.*[#\$])[A-Za-z0-9#$]+$', a):
+                        if title == "password":
+                            regex = r'^(?=.*[A-Za-z])(?=.*\d)(?=.*[#\$])[A-Za-z0-9#$]+$'
+                            if re.match(regex,a):
                                 i.update({"password":a})
                                 print("Operation completed successfully ")
                                 return
                             else :
                                 print("please enter a valid password.")
                                 continue
-
+                        else:
+                            print(f"acceptable ")
+                            i.update({title:a})
+                            break
                 else:
                     print(f"{title} not found.")
                     return
+            return
 
 
         show_list_detail()
@@ -196,31 +222,18 @@ class Buy_Ticket(Normal_User_Panel):
                 print("you can't change the username")
                 continue
             change_detail(title)
-            again = pyip.inputYesNo(prompt=" Do you want to make more changes or return to the previous menu? (y/n) ")
+            again =input('Do you want to make more changes or return to the previous menu? (y/n)')
+            again = again.lower()
             if again == "n":
-                self.show_data()
-                return
-            else:
+                break
+            if again == "y":
                 continue
-
-
-    def show_data(self):
-
-        while True:
-            print("1.buy ticket")
-            print("2.edit detail")
-            print("3.exit")
-            result = input()
-            if result == "1":
-                self.buy_ticket()
-                return
-            if result == "2":
-                self.edit_detail()
-                return
-            if result == "3":
-                return
             else :
-                print("Invalid input")
+                print("Please enter a valid option.")
+                continue
+        self.show_data()
+        return
+
 
 
 
