@@ -21,7 +21,7 @@ class ManagementPanel:#کلاس پنل مدیریت
 
         while True:
             password = input("Please enter the employee's password:")  # دریافت پسورد از کاربر
-            pass_pattern= r'^(?=.*[A-Za-z])(?=.*\d)(?=.*[#\$])[A-Za-z0-9#$]+$'
+            pass_pattern= r'^(?=.*[a-zA-Z])(?=.*\d)(?=.*[@&]).{8,10}$'
             if not re.match(pass_pattern,password):
                 print("password must includ :english alphabet,numbers ,@ or & \n and password length must be between 6 and 16 characters")
                 select=int(input("1 : please enter your password again \n 2 : return to the panel"))
@@ -44,7 +44,7 @@ class ManagementPanel:#کلاس پنل مدیریت
                      print("Error: The username already exists")
                      return#خروج از متد در صورت تکراری
 
-            email_pattern=r'^[a-zA-Z0-9_.%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$'
+            email_pattern=r'^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$'
             if not re.match(email_pattern,email):
                 print("the email must follow the correct format")
                 select=int(input("1 : please enter your email again \n 2 : return to the panel"))
@@ -119,7 +119,7 @@ class ManagementPanel:#کلاس پنل مدیریت
             self.panel()
             return
         for e in self.all_information:
-            print(f"Username: {e["username"]}, Name: {e["name"]} {e["family"]}")
+            print(f"Username: {e['username']}, Name: {e['name']} {e['family']}")
         self.panel()
         return
     def panel(self):  # متد انتخاب پنل توسط کاربر

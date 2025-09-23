@@ -1,0 +1,9 @@
+
+                ==============================
+                 Train Name : pourya
+                 Train ID   : 301
+                 Line Name  : pourya
+                 Price      : 100
+                 Capacity   : 120
+                ==============================
+                

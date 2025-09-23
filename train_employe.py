@@ -264,8 +264,10 @@ list_station  : {i["list_station"]}
         if self.price == 0 :
             self.panel_employee()
         print("please enter amount of train")
+        self.amount = check_int()
         if self.amount == 0 :
             self.panel_employee()
+            return
         self.id_ += 1
         self.list_id.append(self.id_)
 
@@ -476,12 +478,14 @@ list_station  : {i["list_station"]}
                 continue
             if answer == "8":
                 self.list_train()
+                continue
             if answer == "9":
-                return
+                break
+
             else :
                 print("this number is out of range")
                 print("try again")
-
+        return
 
 
 
