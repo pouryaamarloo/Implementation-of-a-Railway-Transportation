@@ -2,16 +2,17 @@ from bank import API
 from train_employe import Employee
 import pyinputplus as pyip
 import datetime as dt
+import re
 
 class Normal_User_Panel(Employee):
     def __init__(self):
         super().__init__()
         self.username ="pouryaam"
         self.User =[{
-            "Name" : "pourya",
-            "Email" : "pourya@gmail.com",
-            "Username" : "pouryaam",
-            "Password" : "123456#@",
+            "name" : "pourya",
+            "email" : "pourya@gmail.com",
+            "username" : "pouryaam",
+            "password" : "123456#@",
             "card"    : {},
         }
         ]
@@ -150,29 +151,111 @@ class Buy_Ticket(Normal_User_Panel):
                     else:
                             continue
 
+
+
     def edit_detail(self):
         def show_list_detail():#show list of information about user
             for i in self.User:
                 if i['username'] == self.username:
                     print(f"""
-                    "Name" : {i["Name"]},
-                    "Email" : {i["Email"]},
-                    "Username" : {i["Username"]},
-                    "Password" : {i['password']},
-                    "card"     :{i["card"]},
-                    """)
+                    Name : {i["name"]},
+                    Email : {i["email"]},
+                    Username : {i["username"]},
+                    Password : {i['password']},                    """)
         def change_detail(title): # edit information
             for i in self.User:
                 if i[title] :
-                    a = input("Apply the changes.")
-                    i.update({title:a})
+                    while True :
+                        a = input("Apply the changes.")
+                        if i[title] == "email":
+                            if re.match(r'^[a-zA-Z0-9_.%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$', a):
+                                i.update({"email":a})
+                                return
+                            else:
+                                print("Please enter a valid email address.")
+                                continue
+                        if i[title] == "password":
+                            if re.match(r'^(?=.*[A-Za-z])(?=.*\d)(?=.*[#\$])[A-Za-z0-9#$]+$', a):
+                                i.update({"password":a})
+                                print("Operation completed successfully ")
+                                return
+                            else :
+                                print("please enter a valid password.")
+                                continue
+                        if i[title] == "card" :
+                            print(f"""
+                            card       : {i["card"]["card"]},
+                            exp_month  : {i["card"]["exp_month"]},
+                            exp_year   : {i["card"]["exp_year"]},
+                            cvv2       : {i["card"]["cvv2"]},                           
+                            """)
+                            card = input("Which part do you want to change")
+                            card = card.lower()
+                            if card in i["card"] :
+                                while True :
+                                    try:
+                                        change =int(input("Enter the new value"))
+                                    except :
+                                        continue
+                                    if card == "card" :
+                                        if len(str(change)) != 16 or not str(card).isnumeric():
+                                            print("Please enter a valid number.")
+                                        else:
+                                            i["card"].update({"card":int(card)})
+                                            print("The changes were successful. ✅")
+                                            return
+                                    if card == "exp_month":
+                                        if not (1 <= change <= 12):
+                                            print("Please enter a valid month.")
+                                            continue
+                                        else :
+                                            i["card"].update({"exp_month":change})
+                                            print("The changes were successful. ✅")
+                                            return
+                                    if card == "exp_year":
+                                        if change < 1403 or change > 1408:
+                                            print("Please enter a valid year.")
+                                            continue
+                                        else:
+                                            i["card"].update({"exp_year":change})
+                                            print("The changes were successful. ✅")
+                                            return
+                                    if card == "cvv2":
+                                        if len(str(change)) != 3:
+                                            print("Please enter a valid CVV2.")
+                                            continue
+                                        else:
+                                            i["card"].update({"cvv2":change})
+                                            print("The changes were successful. ✅")
+                                            return
+                                    if card == "password":
+                                        if len(str(change)) != 6:
+                                            print("Please enter a valid password.")
+                                        else :
+                                            i["card"].update({"password":change})
+                                            print("The changes were successful. ✅")
+                                            return
+
                 else:
                     print(f"{title} not found.")
+                    return
 
 
         show_list_detail()
-        title= input("Which part do you want to change?")
-        change_detail(title)
+        while True:
+            title= input("Which part do you want to change?")
+            title = title.lower()
+            if title == "username":
+                print("you can't change the username")
+                continue
+            change_detail(title)
+            again = pyip.inputYesNo(prompt=" Do you want to make more changes or return to the previous menu? (y/n) ")
+            if again == "n":
+                self.show_data()
+                return
+            else:
+                continue
+
 
     def show_data(self):
 
@@ -198,6 +281,7 @@ class Transaction(Buy_Ticket):
     def __init__(self):
         super().__init__()
 
+
     def deposit(self, amount):
 
         def check_int():
@@ -207,7 +291,7 @@ class Transaction(Buy_Ticket):
                 except ValueError:
                     print("Please enter a number.")
                     continue
-                if a < 0:
+                if a < 0 :
                     print("Please enter a positive number.")
                 else:
                     return a
@@ -239,7 +323,7 @@ class Transaction(Buy_Ticket):
         if flag :
 
             for j in self.User:
-                if j["Username"] == self.username:
+                if j["username"] == self.username:
                     j["card"].update({"card":card,"exp_month":exp_month,"exp_year":exp_year,"password":password ,"cvv2":cvv2})
             print(self.User)
 
