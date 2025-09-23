@@ -78,4 +78,3 @@ def start_panel():
 
 
 
-start_panel()
